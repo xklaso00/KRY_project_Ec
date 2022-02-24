@@ -1,5 +1,8 @@
 package vutbr.feec.eccProjekt.core;
 
+import javax.crypto.*;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 import java.security.*;
 import java.security.spec.ECGenParameterSpec;
 
@@ -30,4 +33,38 @@ public class EcFunctions {
         return ecdsaVerify.verify(signature);
 
     }
+    //function to generate key for AES with ECDH we need our PrivateKey and PublicKey of the person we want to share it with
+     public static SecretKey generateSharedKey(PrivateKey APrivateKey, PublicKey BPublicKey) throws NoSuchAlgorithmException, InvalidKeyException, NoSuchProviderException {
+         KeyAgreement keyAgreement = KeyAgreement.getInstance("ECDH","BC");
+         keyAgreement.init(APrivateKey);
+         keyAgreement.doPhase(BPublicKey, true);
+
+         SecretKey key = keyAgreement.generateSecret("AES");
+         return key;
+     }
+    //function to encrypt byte array with shared key
+     public static byte[] encryptByteArray(SecretKey key, byte[] data, byte [] iv) throws NoSuchPaddingException, NoSuchAlgorithmException, NoSuchProviderException, InvalidAlgorithmParameterException, InvalidKeyException, ShortBufferException, BadPaddingException, IllegalBlockSizeException {
+         IvParameterSpec ivSpec = new IvParameterSpec(iv);
+         Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding","BC");
+
+         cipher.init(Cipher.ENCRYPT_MODE, key, ivSpec);
+         byte[] encrypted = new byte[cipher.getOutputSize(data.length)];
+         int length= cipher.update(data,0,data.length,encrypted);
+         System.out.println("the length var is: "+length);
+         cipher.doFinal(encrypted,length);
+         return encrypted;
+     }
+     //function to decrypt byte arr with shared key
+     public static byte[] decryptByteArray(SecretKey key, byte[] dataToDecrypt,byte[] iv) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, ShortBufferException, BadPaddingException, IllegalBlockSizeException, NoSuchProviderException {
+         Key decryptionKey = new SecretKeySpec(key.getEncoded(), key.getAlgorithm());
+         IvParameterSpec ivSpec = new IvParameterSpec(iv);
+         Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding","BC");
+         cipher.init(Cipher.DECRYPT_MODE, decryptionKey, ivSpec);
+
+         byte[] decryptedData=new byte[cipher.getOutputSize(dataToDecrypt.length)];
+         int length=cipher.update(dataToDecrypt, 0, dataToDecrypt.length, decryptedData, 0);
+         System.out.println("the length var is: "+length);
+         cipher.doFinal(decryptedData, length);
+         return decryptedData;
+     }
 }
