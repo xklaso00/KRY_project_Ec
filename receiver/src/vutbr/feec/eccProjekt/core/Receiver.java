@@ -1,31 +1,53 @@
 package vutbr.feec.eccProjekt.core;
 
+
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileOutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.util.ArrayList;
 
 public class Receiver {
     private JPanel mainPanelReceiver;
+    private JPanel jPFile;
     private JButton listenButton;
     private static DataOutputStream dataOutputStream = null;
     private static DataInputStream dataInputStream = null;
 
+    static ArrayList<MyFile> myFiles = new ArrayList<>();
 
+
+    public static void main(String[] args) {
+        int fileId = 0;
+
+        JFrame frame = new JFrame("Hello2");
+        frame.setBounds(100, 100, 450, 300);
+        frame.setContentPane(new Receiver().mainPanelReceiver);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+
+        new Receiver();
+
+
+        //}
+    }
+
+
+
+    public static  String getFileExtension(String fileName) { //je mozne posielat iba simple files, ako .txt, .pdf
+        int i = fileName.lastIndexOf('.');
+        if(i> 0) {
+            return fileName.substring(i + 1);
+        } else {
+            return "No extension found.";
+        }
+    }
 
     public Receiver() {
-            JFrame frame = new JFrame("Hello2");
-            frame.setBounds(100, 100, 450, 300);
-            frame.setContentPane(new Receiver().mainPanelReceiver);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.pack();
-            frame.setVisible(true);
 
-        listenButton.addActionListener(new ActionListener() {
+
+       /* listenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try(ServerSocket serverSocket = new ServerSocket(5000)){
@@ -36,7 +58,7 @@ public class Receiver {
                     dataOutputStream = new DataOutputStream(clientSocket.getOutputStream());
 
                     receiveFile("NewFile1.pdf");
-                    receiveFile("NewFile2.pdf");
+                    //receiveFile("NewFile2.pdf");
 
                     dataInputStream.close();
                     dataOutputStream.close();
@@ -45,10 +67,11 @@ public class Receiver {
                     ex.printStackTrace();
                 }
             }
-        });
+        });*/
     }
 
     private static void receiveFile(String fileName) throws Exception{
+        System.out.println("File received");
         int bytes = 0;
         FileOutputStream fileOutputStream = new FileOutputStream(fileName);
 

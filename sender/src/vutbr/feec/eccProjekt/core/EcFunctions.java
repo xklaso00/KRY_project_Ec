@@ -10,7 +10,7 @@ public class EcFunctions {
 
     //function for generating keys, the keys can later be converted into byte[] for transportation
     public static KeyPair generateKeyPair() throws InvalidAlgorithmParameterException, NoSuchAlgorithmException {
-        ECGenParameterSpec ecSpec = new ECGenParameterSpec("secp256k1");
+        ECGenParameterSpec ecSpec = new ECGenParameterSpec("secp256r1");
         KeyPairGenerator g = KeyPairGenerator.getInstance("EC");
         g.initialize(ecSpec, new SecureRandom());
         KeyPair keypair = g.generateKeyPair();
