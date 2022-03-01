@@ -1,39 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="81fdce53-2fd9-481d-b184-abbdb814fdf2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/krypto.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/receiver/receiver.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/receiver/src/vutbr/feec/eccProjekt/core/MyFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/receiver/src/vutbr/feec/eccProjekt/core/Receiver.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/receiver/src/vutbr/feec/eccProjekt/core/Receiver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sender/ProjektJava.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sender/sender.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/EcFunctions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/Sender.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/Sender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/TestMain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/Utils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sender/testpdf.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/KotlinJavaRuntime.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/bcprov_jdk15on_167.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="80c88752-2ee7-4df9-b233-125892195a17" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/bcprov_jdk15on_167.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/krypto.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/krypto.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjektJava.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bcprov-jdk15on-167.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProjektJava/vutbr/feec/eccProjekt/core/EcFunctions.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProjektJava/vutbr/feec/eccProjekt/core/TestMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProjektJava/vutbr/feec/eccProjekt/core/Utils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vutbr/feec/eccProjekt/core/EcFunctions.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vutbr/feec/eccProjekt/core/Receiver.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vutbr/feec/eccProjekt/core/Receiver.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vutbr/feec/eccProjekt/core/Sender.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vutbr/feec/eccProjekt/core/Sender.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vutbr/feec/eccProjekt/core/TestMain.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vutbr/feec/eccProjekt/core/Utils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/receiver/src/vutbr/feec/eccProjekt/core/Receiver.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/receiver/src/vutbr/feec/eccProjekt/core/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/receiver/src/vutbr/feec/eccProjekt/core/Receiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sender/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sender/.idea/kotlinc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sender/.idea/libraries/KotlinJavaRuntime.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sender/.idea/libraries/bcprov_jdk15on_167.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sender/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sender/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sender/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sender/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sender/ProjektJava.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/Sender.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/Sender.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,10 +34,8 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
-  </component>
-  <component name="ProjectId" id="25i1sbCTlPiYmDPi3DA5qOZSeue" />
+  <component name="ProjectId" id="25kvXyIjrk6BsFcrKXkXnHAW2A2" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -57,24 +43,16 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/sender/libs/bcprov-jdk15on-167.jar" />
     <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\matus\OneDrive\krypto" />
-      <recent name="C:\Users\matus\OneDrive\krypto\receiver\src\hello" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Application.TestMain (1)">
-    <configuration name="Receiver" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.jdks/openjdk-17.0.2" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+  <component name="RunManager" selected="Application.Receiver">
+    <configuration name="Receiver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="vutbr.feec.eccProjekt.core.Receiver" />
-      <module name="krypto" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/" />
+      <module name="receiver" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="vutbr.feec.eccProjekt.core.*" />
@@ -87,7 +65,7 @@
     </configuration>
     <configuration name="Sender" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="vutbr.feec.eccProjekt.core.Sender" />
-      <module name="krypto" />
+      <module name="sender" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="vutbr.feec.eccProjekt.core.*" />
@@ -98,40 +76,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestMain (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="vutbr.feec.eccProjekt.core.TestMain" />
-      <module name="krypto" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="vutbr.feec.eccProjekt.core.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Application.Receiver" />
-      <item itemvalue="Application.TestMain (1)" />
-      <item itemvalue="Application.Sender" />
-    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TestMain (1)" />
-        <item itemvalue="Application.Sender" />
         <item itemvalue="Application.Receiver" />
+        <item itemvalue="Application.Sender" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="81fdce53-2fd9-481d-b184-abbdb814fdf2" name="Changes" comment="" />
-      <created>1645995300788</created>
+      <changelist id="80c88752-2ee7-4df9-b233-125892195a17" name="Changes" comment="" />
+      <created>1646083944976</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1645995300788</updated>
+      <updated>1646083944976</updated>
     </task>
     <servers />
   </component>

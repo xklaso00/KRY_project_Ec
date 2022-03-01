@@ -2,34 +2,91 @@ package vutbr.feec.eccProjekt.core;
 
 
 import javax.swing.*;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.FileOutputStream;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 
 public class Receiver {
-    private JPanel mainPanelReceiver;
-    private JPanel jPFile;
-    private JButton listenButton;
-    private static DataOutputStream dataOutputStream = null;
-    private static DataInputStream dataInputStream = null;
 
     static ArrayList<MyFile> myFiles = new ArrayList<>();
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         int fileId = 0;
 
-        JFrame frame = new JFrame("Hello2");
-        frame.setBounds(100, 100, 450, 300);
-        frame.setContentPane(new Receiver().mainPanelReceiver);
+        JFrame frame = new JFrame("Receiver");
+        frame.setSize(450, 450);
+        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
+
+        JPanel jPanel = new JPanel();
+        jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.Y_AXIS));
+        JScrollPane jScrollPane = new JScrollPane(jPanel);
+        jScrollPane.setVerticalScrollBarPolicy(jScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+        JLabel jTitle = new JLabel("File Receiver");
+        jTitle.setFont(new Font("Arial", Font.BOLD, 25));
+        jTitle.setBorder(new EmptyBorder(20,0,10,0));
+        jTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        frame.add(jTitle);
+        frame.add(jScrollPane);
         frame.setVisible(true);
 
-        new Receiver();
+        ServerSocket serverSocket = new ServerSocket(5000);
 
+        while (true) {
+            try {
+                Socket socket = serverSocket.accept();
+                DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+                int fileNameLength = dataInputStream.readInt();
 
+                if (fileNameLength > 0) {
+                    byte[] fileNameBytes = new byte[fileNameLength]; //aky velky subor to bude
+                    dataInputStream.readFully(fileNameBytes, 0, fileNameBytes.length);
+                    String fileName = new String(fileNameBytes);
+
+                    int fileContentLength = dataInputStream.readInt();
+
+                    if (fileContentLength > 0) {
+                        byte[] fileContentBytes = new byte[fileContentLength];
+                        dataInputStream.readFully(fileContentBytes, 0, fileContentLength);
+                        JPanel jPFile = new JPanel();
+                        jPFile.setLayout(new BoxLayout(jPFile, BoxLayout.Y_AXIS));
+                        JLabel jPFileName = new JLabel(fileName);
+                        jPFileName.setFont(new Font("Arial", Font.BOLD, 20));
+                        jTitle.setBorder(new EmptyBorder(10,0,10,0));
+
+                        if (getFileExtension(fileName).equalsIgnoreCase("txt")) {
+                            jPFile.setName(String.valueOf(fileId));
+                            jPFile.addMouseListener(getMyMouseListener());
+
+                            jPFile.add(jPFileName);
+                            jPanel.add(jPFile);
+                            frame.validate();
+                        } else {
+                            jPFile.setName(String.valueOf(fileId));
+                            jPFile.addMouseListener(getMyMouseListener());
+                            jPFile.add(jPFileName);
+                            jPanel.add(jPFile);
+
+                            frame.validate();
+                        }
+                        myFiles.add(new MyFile(fileId, fileName, fileContentBytes, getFileExtension(fileName)));
+                        fileId++;
+                    }
+                }
+            } catch (IOException er) {
+                er.printStackTrace();
+            }
+        }
         //}
     }
 
@@ -44,43 +101,105 @@ public class Receiver {
         }
     }
 
-    public Receiver() {
+    public static JFrame createFrame(String fileName, byte[] fileData, String fileExtension) {
+        JFrame jFrame = new JFrame("Downloader");
+        jFrame.setSize(400,400);
 
+        JPanel jPanel = new JPanel();
+        jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.Y_AXIS));
 
-       /* listenButton.addActionListener(new ActionListener() {
+        JLabel jTitle = new JLabel("Downloader");
+        jTitle.setFont(new Font("Arial", Font.BOLD, 25));
+        jTitle.setBorder(new EmptyBorder(20,0,10,0));
+        jTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel jPrompt = new JLabel("Are you sure you want to download?" + fileName);
+        jPrompt.setFont(new Font("Arial", Font.BOLD, 15));
+        jPrompt.setBorder(new EmptyBorder(20,0,10,0));
+        jPrompt.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JButton jBYes = new JButton("Yes");
+        jBYes.setPreferredSize(new Dimension(150,75));
+        jBYes.setFont(new Font("Arial", Font.BOLD, 20));
+
+        JButton jBNo = new JButton("No");
+        jBNo.setPreferredSize(new Dimension(150,75));
+        jBNo.setFont(new Font("Arial", Font.BOLD, 20));
+
+        JLabel jFileContent = new JLabel();
+        jFileContent.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JPanel jpButtons = new JPanel();
+        jpButtons.setBorder(new EmptyBorder(20,0,10,0));
+        jpButtons.add(jBYes);
+        jpButtons.add(jBNo);
+
+        //check, ci sa zobrazi preview, text...
+
+        jBYes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try(ServerSocket serverSocket = new ServerSocket(5000)){
-                    System.out.println("listening to port:5000");
-                    Socket clientSocket = serverSocket.accept();
-                    System.out.println(clientSocket+" connected.");
-                    dataInputStream = new DataInputStream(clientSocket.getInputStream());
-                    dataOutputStream = new DataOutputStream(clientSocket.getOutputStream());
-
-                    receiveFile("NewFile1.pdf");
-                    //receiveFile("NewFile2.pdf");
-
-                    dataInputStream.close();
-                    dataOutputStream.close();
-                    clientSocket.close();
-                } catch (Exception ex){
-                    ex.printStackTrace();
+                File fileToDownload = new File(fileName);
+                try {
+                    FileOutputStream fileOutputStream = new FileOutputStream(fileToDownload);
+                    fileOutputStream.write(fileData);
+                    fileOutputStream.close();
+                    jFrame.dispose();
+                } catch (IOException error) {
+                    error.printStackTrace();
                 }
             }
-        });*/
+        });
+        jBNo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jFrame.dispose();
+            }
+        });
+        jPanel.add(jTitle);
+        jPanel.add(jPrompt);
+        jPanel.add(jFileContent);
+        jPanel.add(jpButtons);
+
+        jFrame.add(jPanel);
+
+        return jFrame;
+
     }
 
-    private static void receiveFile(String fileName) throws Exception{
-        System.out.println("File received");
-        int bytes = 0;
-        FileOutputStream fileOutputStream = new FileOutputStream(fileName);
+    public static MouseListener getMyMouseListener(){
+        return new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) { //otvor subor ktory bol kliknuty
+                JPanel jPanel = (JPanel) e.getSource();
+                int fileId = Integer.parseInt(jPanel.getName());
+                for (MyFile myFile: myFiles) {
+                    if (myFile.getId() == fileId) {
+                        JFrame jfPreview = createFrame(myFile.getName(), myFile.getData(), myFile.getFileExtension());
+                        jfPreview.setVisible(true);
+                    }
+                }
+            }
 
-        long size = dataInputStream.readLong();     // read file size
-        byte[] buffer = new byte[4*1024];
-        while (size > 0 && (bytes = dataInputStream.read(buffer, 0, (int)Math.min(buffer.length, size))) != -1) {
-            fileOutputStream.write(buffer,0,bytes);
-            size -= bytes;      // read upto file size
-        }
-        fileOutputStream.close();
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        };
     }
 }
