@@ -1,17 +1,24 @@
 package vutbr.feec.eccProjekt.core;
 
+import org.bouncycastle.math.ec.ECPoint;
+
 import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.math.BigInteger;
 import java.security.*;
+import java.security.interfaces.ECPrivateKey;
+import java.security.interfaces.ECPublicKey;
 import java.security.spec.ECGenParameterSpec;
 
 public class EcFunctions {
 
     //function for generating keys, the keys can later be converted into byte[] for transportation
-    public static KeyPair generateKeyPair() throws InvalidAlgorithmParameterException, NoSuchAlgorithmException {
+    public static KeyPair generateKeyPair() throws InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException {
+
         ECGenParameterSpec ecSpec = new ECGenParameterSpec("secp256r1");
-        KeyPairGenerator g = KeyPairGenerator.getInstance("EC");
+        KeyPairGenerator g = null;
+        g = KeyPairGenerator.getInstance("EC","BC");
         g.initialize(ecSpec, new SecureRandom());
         KeyPair keypair = g.generateKeyPair();
 
@@ -67,4 +74,22 @@ public class EcFunctions {
          cipher.doFinal(decryptedData, length);
          return decryptedData;
      }
+
+
+    public static KeyPair generateSecKey() throws NoSuchProviderException, NoSuchAlgorithmException, InvalidAlgorithmParameterException {
+
+        KeyPairGenerator g = KeyPairGenerator.getInstance("EC","BC");
+        String  curveName="secp256r1";
+
+        g.initialize(new ECGenParameterSpec(curveName), new SecureRandom());
+        KeyPair aKeyPair = g.generateKeyPair();
+        //ECPrivateKey SecKeyA= (ECPrivateKey)aKeyPair.getPrivate();
+
+        //ECPublicKey PubKeyA= (ECPublicKey)aKeyPair.getPublic();
+        return aKeyPair;
+
+
+    }
+
+
 }

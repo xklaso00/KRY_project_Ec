@@ -5,16 +5,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.*;
+import java.security.cert.X509Certificate;
+import java.security.interfaces.ECPrivateKey;
 
 public class TestMain {
     public static void main(String[] args) {
         Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
         //testing of ECDSA signature on pdf file, should be able to sign anything you can convert to byte[] (so pretty much everything)
-        try {
+        /*try {
             //generate keys, we will later find a way to safely store those, and probably create master key of the app to sign the pub keys?
             KeyPair keyPair= EcFunctions.generateKeyPair();
             PublicKey publicKey = keyPair.getPublic();
-            PrivateKey privateKey = keyPair.getPrivate();
+            ECPrivateKey privateKey = (ECPrivateKey) keyPair.getPrivate();
             //load file that we want to create signature to
             Path pdfPath = Paths.get("testpdf.pdf");
             byte[] pdf = Files.readAllBytes(pdfPath);
@@ -28,7 +30,7 @@ public class TestMain {
             //test of ecdh and encrypt and decrypt with aes with generated key, local for now for testing (i was encrypting the signature cause I am lazy and it is short)
             KeyPair keyPair2 = EcFunctions.generateKeyPair();
             PublicKey publicKey2 = keyPair2.getPublic();
-            PrivateKey privateKey2 = keyPair2.getPrivate();
+            ECPrivateKey privateKey2 = (ECPrivateKey) keyPair2.getPrivate();
             SecretKey sc1= EcFunctions.generateSharedKey(privateKey,publicKey2);
             SecretKey sc2= EcFunctions.generateSharedKey(privateKey2,publicKey);
             System.out.println("Bytes: "+Utils.bytesToHex(signature));
@@ -40,7 +42,12 @@ public class TestMain {
         }
         catch (Exception e){
             System.out.println(e.getMessage());
-        }
+        }*/
+
+        KeyManagement keyManagement= new KeyManagement();
+
+        keyManagement.generateAndSaveKeys();
+        keyManagement.loadKeys();
 
     }
 }
