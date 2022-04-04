@@ -1,12 +1,7 @@
 package vutbr.feec.eccProjekt.core;
 
-import javax.crypto.SecretKey;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.*;
 import java.security.cert.X509Certificate;
-import java.security.interfaces.ECPrivateKey;
 
 public class TestMain {
     public static void main(String[] args) {
@@ -46,8 +41,19 @@ public class TestMain {
 
         KeyManagement keyManagement= new KeyManagement();
 
-        keyManagement.generateAndSaveKeys();
-        keyManagement.loadKeys();
+        //keyManagement.generateAndSaveCAKeys();
+        //keyManagement.loadCAKeys();
+        try {
+            KeyPair kp= EcFunctions.generateKeyPair();
+            //keyManagement.saveClientKey(kp,"hello".toCharArray(),"kita");
+            KeyStore.PrivateKeyEntry pke= keyManagement.getKeyStoreEntry("certs/kita","kita","hello".toCharArray());
+            keyManagement.printCert((X509Certificate) pke.getCertificate());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
 
     }
 }

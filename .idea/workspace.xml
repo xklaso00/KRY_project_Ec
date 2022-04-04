@@ -19,10 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80c88752-2ee7-4df9-b233-125892195a17" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/KeyManagement.java" afterDir="false" />
+    <list default="true" id="80c88752-2ee7-4df9-b233-125892195a17" name="Changes" comment="Started working on keyManagement, saving keys and certs with KeyStore, for now the &quot;CA&quot; key and cert saving/loading should work, but still in testing phase">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/EcFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/EcFunctions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/KeyManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/KeyManagement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/TestMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/TestMain.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -100,13 +99,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -129,8 +130,17 @@
       <updated>1646083944976</updated>
       <workItem from="1647807502902" duration="868000" />
       <workItem from="1648917033182" duration="105000" />
-      <workItem from="1649072214656" duration="5119000" />
+      <workItem from="1649072214656" duration="5629000" />
+      <workItem from="1649080409698" duration="3445000" />
     </task>
+    <task id="LOCAL-00001" summary="Started working on keyManagement, saving keys and certs with KeyStore, for now the &quot;CA&quot; key and cert saving/loading should work, but still in testing phase">
+      <created>1649077790080</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1649077790080</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,28 +158,36 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Started working on keyManagement, saving keys and certs with KeyStore, for now the &quot;CA&quot; key and cert saving/loading should work, but still in testing phase" />
+    <option name="LAST_COMMIT_MESSAGE" value="Started working on keyManagement, saving keys and certs with KeyStore, for now the &quot;CA&quot; key and cert saving/loading should work, but still in testing phase" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="592" y="218" key="FileChooserDialogImpl" timestamp="1648917120177">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="592" y="218" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1648917120177" />
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1647807834853" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1649077203068">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1649083709380">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1649077203068" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1649077203067">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1649083709380" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1649083709379">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1649077203067" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1649077203067">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1649083709379" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1649083709379">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1649077203067" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1649077203068">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1649083709379" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1649083709379">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1649077203068" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1649083709379" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1649077814589">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1649077814589" />
     <state x="209" y="33" key="new project wizard" timestamp="1648917137676">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
