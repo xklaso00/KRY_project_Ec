@@ -14,15 +14,19 @@ import java.security.spec.ECGenParameterSpec;
 public class EcFunctions {
 
     //function for generating keys, the keys can later be converted into byte[] for transportation
-    public static KeyPair generateKeyPair() throws InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException {
+    public static KeyPair generateKeyPair(){
 
         ECGenParameterSpec ecSpec = new ECGenParameterSpec("secp256r1");
         KeyPairGenerator g = null;
-        g = KeyPairGenerator.getInstance("EC","BC");
-        g.initialize(ecSpec, new SecureRandom());
-        KeyPair keypair = g.generateKeyPair();
-
-        return keypair;
+        try {
+            g = KeyPairGenerator.getInstance("EC","BC");
+            g.initialize(ecSpec, new SecureRandom());
+            KeyPair keypair = g.generateKeyPair();
+            return keypair;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
     //function for signing byte[] with private key, returns the signature, byte[] because most stuff can be converted to byte[]
     public static byte[] signByteArray(byte[] data, PrivateKey privateKey) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException {

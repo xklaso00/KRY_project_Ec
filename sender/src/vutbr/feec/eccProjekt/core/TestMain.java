@@ -44,10 +44,12 @@ public class TestMain {
         //keyManagement.generateAndSaveCAKeys();
         //keyManagement.loadCAKeys();
         try {
-            KeyPair kp= EcFunctions.generateKeyPair();
+            //KeyPair kp= EcFunctions.generateKeyPair();
             //keyManagement.saveClientKey(kp,"hello".toCharArray(),"kita");
             KeyStore.PrivateKeyEntry pke= keyManagement.getKeyStoreEntry("certs/kita","kita","hello".toCharArray());
             keyManagement.printCert((X509Certificate) pke.getCertificate());
+            keyManagement.verifyCert((X509Certificate) pke.getCertificate());
+            //keyManagement.loadCert("CAKScert.ser");
 
         } catch (Exception e) {
             e.printStackTrace();

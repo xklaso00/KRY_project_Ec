@@ -3,9 +3,7 @@ package vutbr.feec.eccProjekt.core;
 import org.bouncycastle.jce.X509Principal;
 import org.bouncycastle.x509.X509V3CertificateGenerator;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigInteger;
 import java.security.*;
 import java.security.cert.CertificateEncodingException;
@@ -15,6 +13,7 @@ import java.security.cert.X509Certificate;
 import java.security.interfaces.ECPrivateKey;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 //for now just testing here key storing etc.
 public class KeyManagement {
@@ -129,13 +128,13 @@ public class KeyManagement {
     }*/
 
     //a function for saving client key to file, you need password that will be used to "lock" the file and a name
-    public void saveClientKey(KeyPair keyPair,char[] password, String entityName){
+    public int saveClientKey(KeyPair keyPair,char[] password, String entityName, char[] masterPassword){
         StringBuilder sb= new StringBuilder();
         sb.append("CN=");
         sb.append(entityName);
         String CNEntName=sb.toString();
         try {
-            KeyStore.PrivateKeyEntry CAKeyEntry= getKeyStoreEntry("certs/CAKS","caEntry","B3tt3rP4ssW0rd".toCharArray());
+            KeyStore.PrivateKeyEntry CAKeyEntry= getKeyStoreEntry("certs/CAKS","caEntry",masterPassword);
             X509Certificate clientCert=generateCertificate(keyPair.getPublic(),CAKeyEntry.getPrivateKey(),CNEntName);
             printCert(clientCert);
 
@@ -153,21 +152,69 @@ public class KeyManagement {
             java.io.FileOutputStream fos = null;
             fos = new java.io.FileOutputStream(String.join("","certs/",entityName));
             keyStore.store(fos, password);
-            System.out.println("data stored");
 
+            saveCert(clientCert,entityName);
+
+
+            System.out.println("data stored");
+            return 0;
 
 
 
         } catch (Exception e) {
             e.printStackTrace();
+            return -1;
         }
 
     }
+    public void saveCert(X509Certificate certificate, String name){
+        try {
+
+            String keyFile = String.join("","certs/",name,"cert.ser");
+            FileOutputStream fileOut = new FileOutputStream(keyFile);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(certificate);
+            out.close();
+            fileOut.close();
+            System.out.println("cert saved to file:  "+keyFile);
+        }
+        catch (IOException e)
+        {
+            System.out.println(e.toString());
+        }
+    }
+    public X509Certificate loadCert(String keyFile){
+        //String keyFile = String.join("","certs/",name,"cert.ser");
+
+        try
+        {
+            FileInputStream fileIn = new FileInputStream(keyFile);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            X509Certificate certificate= (X509Certificate) in.readObject();
+            in.close();
+            fileIn.close();
+            System.out.println("Cert has been loaded from  "+keyFile);
+            return  certificate;
+
+        }
+        catch (IOException | ClassNotFoundException e){
+            System.out.println(e.toString());
+            return null;
+        }
+    }
+
+
+
+
     //verify the cert with ca key
     public boolean verifyCert(X509Certificate c){
-        KeyStore.PrivateKeyEntry CAKeyEntry=getKeyStoreEntry("certs/CAKS","caEntry","B3tt3rP4ssW0rd".toCharArray());
+        //KeyStore.PrivateKeyEntry CAKeyEntry=getKeyStoreEntry("certs/CAKS","caEntry","B3tt3rP4ssW0rd".toCharArray());
+
+
+        X509Certificate CACert= loadCert("certs/CAKScert.ser");
         try {
-            c.verify(CAKeyEntry.getCertificate().getPublicKey());
+            c.verify(CACert.getPublicKey());
+            //saveCert((X509Certificate) CAKeyEntry.getCertificate(),"CAKS");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -176,12 +223,12 @@ public class KeyManagement {
     }
     //just a function to print some basic things about a cert
     public void printCert(X509Certificate c){
-        try {
+       /* try {
             CertificateFactory cf = CertificateFactory.getInstance("X509");
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
         //X509Certificate c = (X509Certificate) cf.generateCertificate(fr);
 
         System.out.println("\tCertificate for: " + c.getSubjectDN());

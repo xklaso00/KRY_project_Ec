@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class Receiver {
 
-    static ArrayList<MyFile> myFiles = new ArrayList<>();
+    static ArrayList<MyFileOld> myFileOlds = new ArrayList<>();
 
 
     public static void main(String[] args) throws IOException {
@@ -79,7 +79,7 @@ public class Receiver {
 
                             frame.validate();
                         }
-                        myFiles.add(new MyFile(fileId, fileName, fileContentBytes, getFileExtension(fileName)));
+                        myFileOlds.add(new MyFileOld(fileId, fileName, fileContentBytes, getFileExtension(fileName)));
                         fileId++;
                     }
                 }
@@ -173,9 +173,9 @@ public class Receiver {
             public void mouseClicked(MouseEvent e) { //otvor subor ktory bol kliknuty
                 JPanel jPanel = (JPanel) e.getSource();
                 int fileId = Integer.parseInt(jPanel.getName());
-                for (MyFile myFile: myFiles) {
-                    if (myFile.getId() == fileId) {
-                        JFrame jfPreview = createFrame(myFile.getName(), myFile.getData(), myFile.getFileExtension());
+                for (MyFileOld myFileOld : myFileOlds) {
+                    if (myFileOld.getId() == fileId) {
+                        JFrame jfPreview = createFrame(myFileOld.getName(), myFileOld.getData(), myFileOld.getFileExtension());
                         jfPreview.setVisible(true);
                     }
                 }

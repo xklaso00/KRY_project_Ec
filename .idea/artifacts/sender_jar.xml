@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact name="sender:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/sender_jar</output-path>
+    <root id="root">
+      <element id="archive" name="sender.jar">
+        <element id="module-output" name="sender" />
+      </element>
+      <element id="file-copy" path="$PROJECT_DIR$/sender/libs/bcprov-jdk15on-167.jar" />
+    </root>
+  </artifact>
+</component>
