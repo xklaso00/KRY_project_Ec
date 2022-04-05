@@ -45,17 +45,26 @@ public class EcFunctions {
 
     }
     //function to generate key for AES with ECDH we need our PrivateKey and PublicKey of the person we want to share it with
-     public static SecretKey generateSharedKey(PrivateKey APrivateKey, PublicKey BPublicKey) throws NoSuchAlgorithmException, InvalidKeyException, NoSuchProviderException {
-         KeyAgreement keyAgreement = KeyAgreement.getInstance("ECDH","BC");
-         keyAgreement.init(APrivateKey);
-         keyAgreement.doPhase(BPublicKey, true);
+     public static SecretKey generateSharedKey(PrivateKey APrivateKey, PublicKey BPublicKey) {
+         KeyAgreement keyAgreement = null;
+         try {
+             keyAgreement = KeyAgreement.getInstance("ECDH","BC");
+             keyAgreement.init(APrivateKey);
+             keyAgreement.doPhase(BPublicKey, true);
 
-         SecretKey key = keyAgreement.generateSecret("AES");
-         return key;
+             SecretKey key = keyAgreement.generateSecret("AES");
+
+             return key;
+         } catch (Exception e) {
+             e.printStackTrace();
+             return null;
+         }
+
      }
     //function to encrypt byte array with shared key
-     public static byte[] encryptByteArray(SecretKey key, byte[] data, byte [] iv) throws NoSuchPaddingException, NoSuchAlgorithmException, NoSuchProviderException, InvalidAlgorithmParameterException, InvalidKeyException, ShortBufferException, BadPaddingException, IllegalBlockSizeException {
+     public static byte[] encryptByteArray(SecretKey key, byte[] data, byte [] iv)  {
          IvParameterSpec ivSpec = new IvParameterSpec(iv);
+         try {
          Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding","BC");
 
          cipher.init(Cipher.ENCRYPT_MODE, key, ivSpec);
@@ -64,9 +73,15 @@ public class EcFunctions {
          System.out.println("the length var is: "+length);
          cipher.doFinal(encrypted,length);
          return encrypted;
+         }
+         catch (Exception e){
+             e.printStackTrace();
+             return null;
+         }
      }
      //function to decrypt byte arr with shared key
-     public static byte[] decryptByteArray(SecretKey key, byte[] dataToDecrypt,byte[] iv) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, ShortBufferException, BadPaddingException, IllegalBlockSizeException, NoSuchProviderException {
+     public static byte[] decryptByteArray(SecretKey key, byte[] dataToDecrypt,byte[] iv) {
+        try {
          Key decryptionKey = new SecretKeySpec(key.getEncoded(), key.getAlgorithm());
          IvParameterSpec ivSpec = new IvParameterSpec(iv);
          Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding","BC");
@@ -77,6 +92,12 @@ public class EcFunctions {
          System.out.println("the length var is: "+length);
          cipher.doFinal(decryptedData, length);
          return decryptedData;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+
      }
 
 

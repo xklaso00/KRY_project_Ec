@@ -34,4 +34,32 @@ public class TestSender {
         }
 
     }
+    public static boolean sendEncFile(String fileName, byte[] encryptedFileBytes, byte[] iv, String username){
+
+        try {
+            Socket socket = new Socket("localhost", 5000);
+            DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            byte[] fileNameBytes = fileName.getBytes();
+            byte[] usernameBytes= username.getBytes();
+
+            dataOutputStream.writeInt(usernameBytes.length);
+            dataOutputStream.write(usernameBytes);
+
+            dataOutputStream.writeInt(fileNameBytes.length);
+            dataOutputStream.write(fileNameBytes);
+
+            dataOutputStream.writeInt(encryptedFileBytes.length); //posles aktualne data
+            dataOutputStream.write(encryptedFileBytes);
+
+            dataOutputStream.writeInt(iv.length); //posles aktualne data
+            dataOutputStream.write(iv);
+            dataOutputStream.close();
+
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

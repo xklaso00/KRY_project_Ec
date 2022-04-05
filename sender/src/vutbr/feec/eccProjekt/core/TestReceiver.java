@@ -14,14 +14,25 @@ public class TestReceiver {
     static ArrayList<MyFile> myFiles = new ArrayList<>();
     int fileId = 0;
     public TestReceiver(){
-        try {
-            serverSocket = new ServerSocket(5000);
+
+    }
+    public static void saveDecryptedFile(String destination, byte[] fileBytes){
+        try (FileOutputStream stream = new FileOutputStream(destination)) {
+            stream.write(fileBytes);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     public void saveFile(){
-        String fileDest= String.join("","files/",myFiles.get(0).getName());
+        String extension= myFiles.get(fileId-1).getFileExtension();
+        System.out.println(extension);
+        String fileDest;
+        if(extension.equals("ser")){
+            fileDest= String.join("","certs/",myFiles.get(fileId-1).getName());
+        }
+        else
+            fileDest= String.join("","files/",myFiles.get(fileId-1).getName());
 
         //System.out.println(Utils.bytesToHex(myFiles.get(0).getData()));
         try (FileOutputStream stream = new FileOutputStream(fileDest)) {
@@ -46,6 +57,7 @@ public class TestReceiver {
     public boolean Receive(){
         while (true) {
             try {
+                serverSocket = new ServerSocket(5000);
                 Socket socket = serverSocket.accept();
                 DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
                 int fileNameLength = dataInputStream.readInt();
@@ -62,6 +74,7 @@ public class TestReceiver {
                         myFiles.add(new MyFile(fileId, fileName, fileContentBytes, getFileExtension(fileName)));
                         fileId++;
                         System.out.println("dostal jsem file bro");
+                        serverSocket.close();
                         return true;
 
                     }
@@ -76,9 +89,60 @@ public class TestReceiver {
     public static  String getFileExtension(String fileName) { //je mozne posielat iba simple files, ako .txt, .pdf
         int i = fileName.lastIndexOf('.');
         if(i> 0) {
+
             return fileName.substring(i + 1);
         } else {
             return "No extension found.";
         }
+    }
+    public ArrayList<byte[]> receiveEncrypted(){
+        while (true) {
+            try {
+                serverSocket = new ServerSocket(5000);
+                Socket socket = serverSocket.accept();
+                DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+
+                int usernameLength = dataInputStream.readInt();
+
+                if (usernameLength > 0) {
+                    byte[] usernameBytes = new byte[usernameLength];
+                    dataInputStream.readFully(usernameBytes, 0, usernameBytes.length);
+                    //String fileName = new String(fileNameBytes);
+                    System.out.println("username: "+new String(usernameBytes));
+
+                    int fileNameLength= dataInputStream.readInt();
+                    byte[] fileNameBytes= new byte[fileNameLength];
+                    dataInputStream.readFully(fileNameBytes, 0, fileNameBytes.length);
+                    System.out.println("filename: "+new String(fileNameBytes));
+
+                    int encMsgLength= dataInputStream.readInt();
+                    byte[] encMsgBytes = new byte[encMsgLength];
+                    dataInputStream.readFully(encMsgBytes, 0, encMsgBytes.length);
+                    System.out.println("length of bytes is "+encMsgLength);
+
+                    int ivLength= dataInputStream.readInt();
+                    byte[] ivBytes= new byte[ivLength];
+                    dataInputStream.readFully(ivBytes, 0, ivBytes.length);
+                    System.out.println("length of iv is "+ivLength);
+
+                    ArrayList<byte[]> returnList= new ArrayList<>();
+                    returnList.add(usernameBytes);
+                    returnList.add(fileNameBytes);
+                    returnList.add(encMsgBytes);
+                    returnList.add(ivBytes);
+                    serverSocket.close();
+                    return  returnList;
+
+
+                }
+            } catch (IOException er) {
+
+                er.printStackTrace();
+                return null;
+            }
+        }
+
+
+
     }
 }

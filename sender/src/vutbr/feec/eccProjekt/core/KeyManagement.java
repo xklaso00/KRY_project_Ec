@@ -85,7 +85,7 @@ public class KeyManagement {
     }*/
     //function that gets you the privateKeyEntry from a file. you need path to file, alias of the entry and a password
     //it returns the entry, from that you can get cert or private key
-    public KeyStore.PrivateKeyEntry getKeyStoreEntry(String path, String alias, char[] password){
+    public static KeyStore.PrivateKeyEntry getKeyStoreEntry(String path, String alias, char[] password){
         try {
             KeyStore keyStore = KeyStore.getInstance("BKS");
             java.io.FileInputStream fis = new FileInputStream(path);
