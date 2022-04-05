@@ -17,6 +17,11 @@ public class TestReceiver {
 
     }
     public static void saveDecryptedFile(String destination, byte[] fileBytes){
+        File directory = new File("files/");
+        if (! directory.exists()){
+            directory.mkdir();
+
+        }
         try (FileOutputStream stream = new FileOutputStream(destination)) {
             stream.write(fileBytes);
         } catch (IOException e) {
@@ -28,6 +33,11 @@ public class TestReceiver {
         String extension= myFiles.get(fileId-1).getFileExtension();
         System.out.println(extension);
         String fileDest;
+        File directory = new File("files/");
+        if (! directory.exists()){
+            directory.mkdir();
+
+        }
         if(extension.equals("ser")){
             fileDest= String.join("","certs/",myFiles.get(fileId-1).getName());
         }
