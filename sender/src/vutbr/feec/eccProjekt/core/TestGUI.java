@@ -105,6 +105,7 @@ public class TestGUI {
                             status=get();
                             if(status) {
                                 receiveWasSuccessful.setText("Receive was successful");
+                                testReceiver.saveFile();
                             }
                             else
                                 receiveWasSuccessful.setText("Receive failed");

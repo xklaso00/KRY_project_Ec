@@ -24,22 +24,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80c88752-2ee7-4df9-b233-125892195a17" name="Changes" comment="Added functions for client saving / loading keys and certs, cleaned up some of the functions to have more use cases">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/sender_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/MyFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/RegisterForm.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/RegisterForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/TestGUI.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/TestGUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/TestReceiver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/TestSender.java" afterDir="false" />
+    <list default="true" id="80c88752-2ee7-4df9-b233-125892195a17" name="Changes" comment="Cleaned up functions for certs keys etc, added some new for saving and loading certs.&#10;Started working on simple GUI, we can now create new &quot;users&quot; with certs and keys that are saved.&#10;Merged the send and receive function to one program. You now need to generate jar file so you can open 2 copies of the app. It should work, little messy needs some work, will add comments later.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/receiver/src/vutbr/feec/eccProjekt/core/MyFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/receiver/src/vutbr/feec/eccProjekt/core/MyFileOld.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/receiver/src/vutbr/feec/eccProjekt/core/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/receiver/src/vutbr/feec/eccProjekt/core/Receiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/EcFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/EcFunctions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/KeyManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/KeyManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/TestMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/TestMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/TestGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/TestGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/TestReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/TestReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/TestSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/sender/src/vutbr/feec/eccProjekt/core/TestSender.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,17 +123,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.TestGUI" />
@@ -166,7 +144,8 @@
       <workItem from="1648917033182" duration="105000" />
       <workItem from="1649072214656" duration="5629000" />
       <workItem from="1649080409698" duration="3556000" />
-      <workItem from="1649154414173" duration="7192000" />
+      <workItem from="1649154414173" duration="7510000" />
+      <workItem from="1649162994766" duration="2078000" />
     </task>
     <task id="LOCAL-00001" summary="Started working on keyManagement, saving keys and certs with KeyStore, for now the &quot;CA&quot; key and cert saving/loading should work, but still in testing phase">
       <created>1649077790080</created>
@@ -189,7 +168,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649083980329</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Cleaned up functions for certs keys etc, added some new for saving and loading certs.&#10;Started working on simple GUI, we can now create new &quot;users&quot; with certs and keys that are saved.&#10;Merged the send and receive function to one program. You now need to generate jar file so you can open 2 copies of the app. It should work, little messy needs some work, will add comments later.">
+      <created>1649161965068</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1649161965068</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,7 +196,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Started working on keyManagement, saving keys and certs with KeyStore, for now the &quot;CA&quot; key and cert saving/loading should work, but still in testing phase" />
     <MESSAGE value="Added functions for client saving / loading keys and certs, cleaned up some of the functions to have more use cases" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added functions for client saving / loading keys and certs, cleaned up some of the functions to have more use cases" />
+    <MESSAGE value="Cleaned up functions for certs keys etc, added some new for saving and loading certs.&#10;Started working on simple GUI, we can now create new &quot;users&quot; with certs and keys that are saved.&#10;Merged the send and receive function to one program. You now need to generate jar file so you can open 2 copies of the app. It should work, little messy needs some work, will add comments later." />
+    <option name="LAST_COMMIT_MESSAGE" value="Cleaned up functions for certs keys etc, added some new for saving and loading certs.&#10;Started working on simple GUI, we can now create new &quot;users&quot; with certs and keys that are saved.&#10;Merged the send and receive function to one program. You now need to generate jar file so you can open 2 copies of the app. It should work, little messy needs some work, will add comments later." />
   </component>
   <component name="WindowStateProjectService">
     <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser" timestamp="1649160547999">
@@ -238,34 +225,35 @@
     </state>
     <state x="592" y="218" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1648917120177" />
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1647807834853" />
-    <state width="1877" height="281" key="GridCell.Tab.0.bottom" timestamp="1649161013736">
+    <state width="1877" height="281" key="GridCell.Tab.0.bottom" timestamp="1649165022220">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1649083993569" />
-    <state width="1877" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1649161013736" />
-    <state width="1877" height="281" key="GridCell.Tab.0.center" timestamp="1649161013736">
+    <state width="1877" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1649165022220" />
+    <state width="1877" height="281" key="GridCell.Tab.0.center" timestamp="1649165022220">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1649083993569" />
-    <state width="1877" height="281" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1649161013736" />
-    <state width="1877" height="281" key="GridCell.Tab.0.left" timestamp="1649161013736">
+    <state width="1877" height="281" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1649165022220" />
+    <state width="1877" height="281" key="GridCell.Tab.0.left" timestamp="1649165022220">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1649083993569" />
-    <state width="1877" height="281" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1649161013736" />
-    <state width="1877" height="281" key="GridCell.Tab.0.right" timestamp="1649161013736">
+    <state width="1877" height="281" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1649165022220" />
+    <state width="1877" height="281" key="GridCell.Tab.0.right" timestamp="1649165022220">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1649083993569" />
-    <state width="1877" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1649161013736" />
+    <state width="1877" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1649165022220" />
     <state x="440" y="94" key="SettingsEditor" timestamp="1649161674804">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1649161674804" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1649083987946">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="451" y="183" key="Vcs.Push.Dialog.v2" timestamp="1649161985174">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1649083987946" />
+    <state x="451" y="183" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1649161985174" />
     <state x="209" y="33" key="new project wizard" timestamp="1648917137676">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

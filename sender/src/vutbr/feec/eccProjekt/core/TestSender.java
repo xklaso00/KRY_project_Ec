@@ -21,7 +21,7 @@ public class TestSender {
 
             byte[] fileContentBytes = new byte[(int) fileToSend.length()];
             fileInputStream.read(fileContentBytes);
-
+            //System.out.println(Utils.bytesToHex(fileContentBytes));
             dataOutputStream.writeInt(fileNameBytes.length); //posles na server dlzku dat ktore bude dostavat
             dataOutputStream.write(fileNameBytes);
 
