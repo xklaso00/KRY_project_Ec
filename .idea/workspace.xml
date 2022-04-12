@@ -24,34 +24,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80c88752-2ee7-4df9-b233-125892195a17" name="Changes" comment="files folder should now be created if not found">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/EcFunctions.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/EcFunctions.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/KeyManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/KeyManagement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/MyFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/MyFile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/RegisterForm$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/RegisterForm$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/RegisterForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/RegisterForm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/Sender$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/Sender$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/Sender$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/Sender$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/Sender.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/Sender.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$3$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$3$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$4$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$4$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$6$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$6$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$7$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$7$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestMain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestReceiver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestReceiver.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestSender.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestSender.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/Utils.class" afterDir="false" />
-    </list>
+    <list default="true" id="80c88752-2ee7-4df9-b233-125892195a17" name="Changes" comment="tried creating java 8 version in senderjar2" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -183,7 +156,7 @@
       <workItem from="1649162994766" duration="12889000" />
       <workItem from="1649231261123" duration="1038000" />
       <workItem from="1649401014429" duration="23000" />
-      <workItem from="1649778119032" duration="816000" />
+      <workItem from="1649778119032" duration="1113000" />
     </task>
     <task id="LOCAL-00001" summary="Started working on keyManagement, saving keys and certs with KeyStore, for now the &quot;CA&quot; key and cert saving/loading should work, but still in testing phase">
       <created>1649077790080</created>
@@ -255,7 +228,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649179196352</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="tried creating java 8 version in senderjar2">
+      <created>1649779096783</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1649779096783</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -282,7 +262,8 @@
     <MESSAGE value="directory with jar for using it as 2 programs" />
     <MESSAGE value="placeholder file to push files folder to git" />
     <MESSAGE value="files folder should now be created if not found" />
-    <option name="LAST_COMMIT_MESSAGE" value="files folder should now be created if not found" />
+    <MESSAGE value="tried creating java 8 version in senderjar2" />
+    <option name="LAST_COMMIT_MESSAGE" value="tried creating java 8 version in senderjar2" />
   </component>
   <component name="WindowStateProjectService">
     <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser" timestamp="1649175898278">
@@ -310,35 +291,35 @@
     </state>
     <state x="592" y="218" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1648917120177" />
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1649778430137" />
-    <state width="1877" height="281" key="GridCell.Tab.0.bottom" timestamp="1649778862597">
+    <state width="1877" height="281" key="GridCell.Tab.0.bottom" timestamp="1649778957719">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1649083993569" />
-    <state width="1877" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1649778862597" />
-    <state width="1877" height="281" key="GridCell.Tab.0.center" timestamp="1649778862597">
+    <state width="1877" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1649778957719" />
+    <state width="1877" height="281" key="GridCell.Tab.0.center" timestamp="1649778957719">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1649083993569" />
-    <state width="1877" height="281" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1649778862597" />
-    <state width="1877" height="281" key="GridCell.Tab.0.left" timestamp="1649778862597">
+    <state width="1877" height="281" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1649778957719" />
+    <state width="1877" height="281" key="GridCell.Tab.0.left" timestamp="1649778957719">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1649083993569" />
-    <state width="1877" height="281" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1649778862597" />
-    <state width="1877" height="281" key="GridCell.Tab.0.right" timestamp="1649778862597">
+    <state width="1877" height="281" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1649778957719" />
+    <state width="1877" height="281" key="GridCell.Tab.0.right" timestamp="1649778957719">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1649083993569" />
-    <state width="1877" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1649778862597" />
-    <state x="440" y="94" key="SettingsEditor" timestamp="1649778952865">
+    <state width="1877" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1649778957719" />
+    <state x="440" y="94" key="SettingsEditor" timestamp="1649779230128">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1649778952865" />
-    <state x="451" y="183" key="Vcs.Push.Dialog.v2" timestamp="1649179202804">
+    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1649779230128" />
+    <state x="451" y="183" key="Vcs.Push.Dialog.v2" timestamp="1649779101758">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1649083987946" />
-    <state x="451" y="183" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1649179202804" />
+    <state x="451" y="183" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1649779101758" />
     <state x="209" y="33" key="new project wizard" timestamp="1648917137676">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
