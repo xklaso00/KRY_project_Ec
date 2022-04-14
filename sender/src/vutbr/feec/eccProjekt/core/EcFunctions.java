@@ -1,5 +1,7 @@
 package vutbr.feec.eccProjekt.core;
 
+import org.bouncycastle.jce.spec.IEKeySpec;
+import org.bouncycastle.jce.spec.IESParameterSpec;
 import org.bouncycastle.math.ec.ECPoint;
 
 import javax.crypto.*;
@@ -12,6 +14,24 @@ import java.security.interfaces.ECPublicKey;
 import java.security.spec.ECGenParameterSpec;
 
 public class EcFunctions {
+    private byte[] d;
+    private byte[]e;
+
+    public byte[] getD() {
+        return d;
+    }
+
+    public void setD(byte[] d) {
+        this.d = d;
+    }
+
+    public byte[] getE() {
+        return e;
+    }
+
+    public void setE(byte[] e) {
+        this.e = e;
+    }
 
     //function for generating keys, the keys can later be converted into byte[] for transportation
     public static KeyPair generateKeyPair(){
@@ -62,17 +82,35 @@ public class EcFunctions {
 
      }
     //function to encrypt byte array with shared key
-     public static byte[] encryptByteArray(SecretKey key, byte[] data, byte [] iv)  {
-         IvParameterSpec ivSpec = new IvParameterSpec(iv);
+     public byte[] encryptByteArray(PrivateKey privateKey, PublicKey publicKey, byte[] data, byte [] iv)  {
+         //IvParameterSpec ivSpec = new IvParameterSpec(iv);
          try {
-         Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding","BC");
+        /* Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding","BC");
 
          cipher.init(Cipher.ENCRYPT_MODE, key, ivSpec);
          byte[] encrypted = new byte[cipher.getOutputSize(data.length)];
          int length= cipher.update(data,0,data.length,encrypted);
          System.out.println("the length var is: "+length);
          cipher.doFinal(encrypted,length);
-         return encrypted;
+         return encrypted;*/
+             // get ECIES cipher objects
+             Cipher acipher = Cipher.getInstance("ECIES","BC");
+
+             //  generate derivation and encoding vectors
+             d = new SecureRandom().generateSeed(8);;
+
+             e = iv;
+             IESParameterSpec param = new IESParameterSpec(d, e, 256);
+
+             // encrypt the plaintext using the public key
+             acipher.init(Cipher.ENCRYPT_MODE, new IEKeySpec(privateKey,publicKey), param);
+             /*byte[] encrypted = new byte[acipher.getOutputSize(data.length)];
+             int length= acipher.update(data,0,data.length,encrypted);
+             acipher.doFinal(encrypted,length);
+             return encrypted;*/
+             return acipher.doFinal(data);
+
+
          }
          catch (Exception e){
              e.printStackTrace();
@@ -80,9 +118,9 @@ public class EcFunctions {
          }
      }
      //function to decrypt byte arr with shared key
-     public static byte[] decryptByteArray(SecretKey key, byte[] dataToDecrypt,byte[] iv) {
+     public byte[] decryptByteArray(PrivateKey privateKey,PublicKey publicKey, byte[] dataToDecrypt,byte[] iv, byte []d) {
         try {
-         Key decryptionKey = new SecretKeySpec(key.getEncoded(), key.getAlgorithm());
+         /*Key decryptionKey = new SecretKeySpec(key.getEncoded(), key.getAlgorithm());
          IvParameterSpec ivSpec = new IvParameterSpec(iv);
          Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding","BC");
          cipher.init(Cipher.DECRYPT_MODE, decryptionKey, ivSpec);
@@ -91,7 +129,22 @@ public class EcFunctions {
          int length=cipher.update(dataToDecrypt, 0, dataToDecrypt.length, decryptedData, 0);
          System.out.println("the length var is: "+length);
          cipher.doFinal(decryptedData, length);
-         return decryptedData;
+         return decryptedData;*/
+            Cipher cipher = Cipher.getInstance("ECIES","BC");
+
+            //  generate derivation and encoding vectors
+            this.d = d;
+            e = iv;
+
+            IESParameterSpec param = new IESParameterSpec(d, e, 256);
+
+            // decrypt the text using the private key
+            cipher.init(Cipher.DECRYPT_MODE, new IEKeySpec(privateKey,publicKey), param);
+            /*byte[] decryptedData=new byte[cipher.getOutputSize(dataToDecrypt.length)];
+            int length=cipher.update(dataToDecrypt, 0, dataToDecrypt.length, decryptedData, 0);
+            cipher.doFinal(decryptedData, length);
+            return decryptedData;*/
+            return cipher.doFinal(dataToDecrypt);
         }
         catch (Exception e){
             e.printStackTrace();

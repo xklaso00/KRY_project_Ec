@@ -135,11 +135,17 @@ public class TestReceiver {
                     dataInputStream.readFully(ivBytes, 0, ivBytes.length);
                     System.out.println("length of iv is "+ivLength);
 
+                    int dLength= dataInputStream.readInt();
+                    byte[] dBytes= new byte[dLength];
+                    dataInputStream.readFully(dBytes, 0, dBytes.length);
+                    System.out.println("length of d is "+dLength);
+
                     ArrayList<byte[]> returnList= new ArrayList<>();
                     returnList.add(usernameBytes);
                     returnList.add(fileNameBytes);
                     returnList.add(encMsgBytes);
                     returnList.add(ivBytes);
+                    returnList.add(dBytes);
                     serverSocket.close();
                     return  returnList;
 

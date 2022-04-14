@@ -9,10 +9,10 @@ public class TestSender {
     public TestSender(String path){
         this.path=path;
     }
-    public boolean sendFile(File fileToSend){
+    public boolean sendFile(File fileToSend,String address){
         try {
             FileInputStream fileInputStream = new FileInputStream(path);
-            Socket socket = new Socket("localhost", 5000);
+            Socket socket = new Socket(address, 5000);
 
             DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
 
@@ -34,10 +34,10 @@ public class TestSender {
         }
 
     }
-    public static boolean sendEncFile(String fileName, byte[] encryptedFileBytes, byte[] iv, String username){
+    public static boolean sendEncFile(String fileName, byte[] encryptedFileBytes, byte[] iv, String username, String address, byte []d){
 
         try {
-            Socket socket = new Socket("localhost", 5000);
+            Socket socket = new Socket(address, 5000);
             DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
             byte[] fileNameBytes = fileName.getBytes();
             byte[] usernameBytes= username.getBytes();
@@ -53,6 +53,9 @@ public class TestSender {
 
             dataOutputStream.writeInt(iv.length); //posles aktualne data
             dataOutputStream.write(iv);
+
+            dataOutputStream.writeInt(d.length); //posles aktualne data
+            dataOutputStream.write(d);
             dataOutputStream.close();
 
 

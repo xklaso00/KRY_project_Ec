@@ -6,8 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.security.*;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
@@ -31,6 +29,9 @@ public class TestGUI {
     private JButton receiveEncryptedFileButton;
     private JLabel encSendLabel;
     private JLabel encRecLabel;
+    private JTextField IPtextField;
+    private JButton confirmAddressButton;
+    private JLabel TargetIPLabel;
     private JFrame frame;
     RegisterForm registerForm;
     KeyManagement keyManagement;
@@ -41,6 +42,8 @@ public class TestGUI {
     private byte[] lastIV;
     SecretKey secretKey;
     private String lastFileName;
+    private String targetIPaddress ="localhost";
+    EcFunctions ecFunctions;
     public TestGUI(){
         this.initialize();
 
@@ -80,7 +83,7 @@ public class TestGUI {
                 SwingWorker<Boolean, Void> worker = new SwingWorker<Boolean, Void>() {
                     @Override
                     protected Boolean doInBackground() throws Exception {
-                        return testSender.sendFile(fileToSend);
+                        return testSender.sendFile(fileToSend, targetIPaddress);
                     }
 
                     // GUI can be updated from this method.
@@ -155,7 +158,7 @@ public class TestGUI {
                 SwingWorker<Boolean, Void> worker = new SwingWorker<Boolean, Void>() {
                     @Override
                     protected Boolean doInBackground() throws Exception {
-                        return TestSender.sendEncFile(lastFileName,encrypted,lastIV,loggedUserName);
+                        return TestSender.sendEncFile(lastFileName,encrypted,lastIV,loggedUserName, targetIPaddress,ecFunctions.getD());
                     }
 
                     // GUI can be updated from this method.
@@ -214,6 +217,14 @@ public class TestGUI {
                 worker.execute();
             }
         });
+        confirmAddressButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                targetIPaddress =IPtextField.getText();
+                TargetIPLabel.setText("Target IP: "+ targetIPaddress);
+                IPtextField.setText("");
+            }
+        });
     }
 
     private void initialize(){
@@ -224,6 +235,7 @@ public class TestGUI {
         //process= new TestProcess();
         frame.setVisible(true);
         keyManagement= new KeyManagement();
+        ecFunctions= new EcFunctions();
     }
 
     public static void main(String[] args) {
@@ -276,9 +288,9 @@ public class TestGUI {
 
             X509Certificate cert= keyManagement.loadCert(certFile.getAbsolutePath());
             PublicKey publicKey= cert.getPublicKey();
-            secretKey= EcFunctions.generateSharedKey(loggedUserPrivateKey,publicKey);
-            lastIV=new SecureRandom().generateSeed(16);
-            byte[] encryptedBytes= EcFunctions.encryptByteArray(secretKey,fileContentBytes,lastIV);
+            //secretKey= EcFunctions.generateSharedKey(loggedUserPrivateKey,publicKey);
+            lastIV=new SecureRandom().generateSeed(8);
+            byte[] encryptedBytes= ecFunctions.encryptByteArray(loggedUserPrivateKey,publicKey,fileContentBytes,lastIV);
             return encryptedBytes;
 
         } catch (Exception e) {
@@ -296,8 +308,8 @@ public class TestGUI {
         String entityName=new String(received.get(0));
         String filename= new String(received.get(1));
         X509Certificate cert= keyManagement.loadCert(String.join("","certs/",entityName,"cert.ser"));
-        secretKey=EcFunctions.generateSharedKey(loggedUserPrivateKey,cert.getPublicKey());
-        byte[] decryptedBytes= EcFunctions.decryptByteArray(secretKey,received.get(2),received.get(3));
+        //secretKey=EcFunctions.generateSharedKey(loggedUserPrivateKey,cert.getPublicKey());
+        byte[] decryptedBytes= ecFunctions.decryptByteArray(loggedUserPrivateKey,cert.getPublicKey(),received.get(2),received.get(3),received.get(4));
         String destination= String.join("","files/",filename);
         TestReceiver.saveDecryptedFile(destination,decryptedBytes);
         return true;
