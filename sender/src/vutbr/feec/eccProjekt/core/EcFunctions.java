@@ -7,6 +7,8 @@ import org.bouncycastle.math.ec.ECPoint;
 import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.File;
+import java.io.FileInputStream;
 import java.math.BigInteger;
 import java.security.*;
 import java.security.interfaces.ECPrivateKey;
@@ -104,10 +106,7 @@ public class EcFunctions {
 
              // encrypt the plaintext using the public key
              acipher.init(Cipher.ENCRYPT_MODE, new IEKeySpec(privateKey,publicKey), param);
-             /*byte[] encrypted = new byte[acipher.getOutputSize(data.length)];
-             int length= acipher.update(data,0,data.length,encrypted);
-             acipher.doFinal(encrypted,length);
-             return encrypted;*/
+
              return acipher.doFinal(data);
 
 
@@ -140,10 +139,7 @@ public class EcFunctions {
 
             // decrypt the text using the private key
             cipher.init(Cipher.DECRYPT_MODE, new IEKeySpec(privateKey,publicKey), param);
-            /*byte[] decryptedData=new byte[cipher.getOutputSize(dataToDecrypt.length)];
-            int length=cipher.update(dataToDecrypt, 0, dataToDecrypt.length, decryptedData, 0);
-            cipher.doFinal(decryptedData, length);
-            return decryptedData;*/
+
             return cipher.doFinal(dataToDecrypt);
         }
         catch (Exception e){
@@ -167,6 +163,17 @@ public class EcFunctions {
         return aKeyPair;
 
 
+    }
+    public static byte[] SignFile(File file,PrivateKey privateKey){
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file.getAbsolutePath());
+            byte[] fileContentBytes = new byte[(int) file.length()];
+            fileInputStream.read(fileContentBytes);
+            return signByteArray(fileContentBytes,privateKey);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
 

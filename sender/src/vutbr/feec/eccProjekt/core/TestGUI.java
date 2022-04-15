@@ -32,6 +32,10 @@ public class TestGUI {
     private JTextField IPtextField;
     private JButton confirmAddressButton;
     private JLabel TargetIPLabel;
+    private JButton sendSignedFileButton;
+    private JButton receiveSignedFileButton;
+    private JLabel signedSendLabel;
+    private JLabel signedReceiveLabel;
     private JFrame frame;
     RegisterForm registerForm;
     KeyManagement keyManagement;
@@ -44,6 +48,7 @@ public class TestGUI {
     private String lastFileName;
     private String targetIPaddress ="localhost";
     EcFunctions ecFunctions;
+    TestReceiver testReceiver;
     public TestGUI(){
         this.initialize();
 
@@ -83,7 +88,7 @@ public class TestGUI {
                 SwingWorker<Boolean, Void> worker = new SwingWorker<Boolean, Void>() {
                     @Override
                     protected Boolean doInBackground() throws Exception {
-                        return testSender.sendFile(fileToSend, targetIPaddress);
+                        return testSender.sendFile(fileToSend, targetIPaddress,null,loggedUserName);
                     }
 
                     // GUI can be updated from this method.
@@ -118,7 +123,7 @@ public class TestGUI {
                     @Override
                     protected Boolean doInBackground() throws Exception {
                         System.out.println("Receiving");
-                        return testReceiver.Receive();
+                        return testReceiver.Receive(false);
                     }
 
                     // GUI can be updated from this method.
@@ -225,6 +230,77 @@ public class TestGUI {
                 IPtextField.setText("");
             }
         });
+        sendSignedFileButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File fileToSend= getFileFromPC("Choose file to send");
+                TestSender testSender= new TestSender(fileToSend.getAbsolutePath());
+                byte []signature=EcFunctions.SignFile(fileToSend,loggedUserPrivateKey);
+                SwingWorker<Boolean, Void> worker = new SwingWorker<Boolean, Void>() {
+                    @Override
+                    protected Boolean doInBackground() throws Exception {
+                        return testSender.sendFile(fileToSend, targetIPaddress,signature,loggedUserName);
+                    }
+
+                    // GUI can be updated from this method.
+                    protected void done() {
+                        boolean status;
+                        try {
+                            status=get();
+                            if(status) {
+                                signedSendLabel.setText("Sending was successful");
+                            }
+                            else
+                                signedSendLabel.setText("Sending failed");
+                            return;
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                            signedSendLabel.setText("Sending failed");
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                            signedSendLabel.setText("Sending failed");
+                        }
+                    }
+
+                };
+                worker.execute();
+            }
+        });
+        receiveSignedFileButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                signedReceiveLabel.setText("Receiving signed file...");
+                SwingWorker<Boolean, Void> worker = new SwingWorker<Boolean, Void>() {
+                    @Override
+                    protected Boolean doInBackground() throws Exception {
+                        System.out.println("Receiving Signed");
+                        return receiveSigned();
+                    }
+
+                    // GUI can be updated from this method.
+                    protected void done() {
+                        boolean status;
+                        try {
+                            status=get();
+                            if(status) {
+                                signedReceiveLabel.setText("Receive was successful");
+                                JFrame jFrame = new JFrame();
+                                JOptionPane.showMessageDialog(jFrame, String.format("Signature of the file from %s is legit, the file was saved to /files/%s ", testReceiver.getUsername(),testReceiver.lastFilename));
+                            }
+                            else
+                                signedReceiveLabel.setText("Receive failed");
+                            return;
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                };
+                worker.execute();
+            }
+        });
     }
 
     private void initialize(){
@@ -301,7 +377,7 @@ public class TestGUI {
         return null;
     }
     public boolean receiveEncrypted(){
-        TestReceiver testReceiver= new TestReceiver();
+        testReceiver= new TestReceiver();
         ArrayList<byte[]> received=testReceiver.receiveEncrypted();
         if (received==null)
             return false;
@@ -313,6 +389,29 @@ public class TestGUI {
         String destination= String.join("","files/",filename);
         TestReceiver.saveDecryptedFile(destination,decryptedBytes);
         return true;
+    }
+    public boolean receiveSigned(){
+        testReceiver = new TestReceiver();
+        boolean received =testReceiver.Receive(true);
+        if(!received)
+            return false;
+        String entityName= testReceiver.getUsername();
+        X509Certificate cert= keyManagement.loadCert(String.join("","certs/",entityName,"cert.ser"));
+        byte []fileBytes=testReceiver.getFileBytes();
+
+        try {
+            boolean legitSignature = EcFunctions.verifySignedByteArray(fileBytes,testReceiver.getSignature(),cert.getPublicKey());
+            if(legitSignature){
+                testReceiver.saveFile();
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+
     }
 
 }

@@ -12,10 +12,27 @@ import java.util.ArrayList;
 public class TestReceiver {
     ServerSocket serverSocket;
     static ArrayList<MyFile> myFiles = new ArrayList<>();
+    private byte[] signature=null;
+    private String username;
+    private byte [] fileBytes=null;
+    protected String lastFilename;
     int fileId = 0;
     public TestReceiver(){
 
     }
+
+    public byte[] getSignature() {
+        return signature;
+    }
+
+    public void setSignature(byte[] signature) {
+        this.signature = signature;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
     public static void saveDecryptedFile(String destination, byte[] fileBytes){
         File directory = new File("files/");
         if (! directory.exists()){
@@ -64,7 +81,7 @@ public class TestReceiver {
             e.printStackTrace();
         }*/
     }
-    public boolean Receive(){
+    public boolean Receive(boolean Signed){
         while (true) {
             try {
                 serverSocket = new ServerSocket(5000);
@@ -76,14 +93,31 @@ public class TestReceiver {
                     byte[] fileNameBytes = new byte[fileNameLength]; //aky velky subor to bude
                     dataInputStream.readFully(fileNameBytes, 0, fileNameBytes.length);
                     String fileName = new String(fileNameBytes);
-
+                    lastFilename=fileName;
                     int fileContentLength = dataInputStream.readInt();
                     if (fileContentLength > 0) {
                         byte[] fileContentBytes = new byte[fileContentLength];
                         dataInputStream.readFully(fileContentBytes, 0, fileContentLength);
                         myFiles.add(new MyFile(fileId, fileName, fileContentBytes, getFileExtension(fileName)));
                         fileId++;
+                        fileBytes=fileContentBytes;
                         System.out.println("dostal jsem file bro");
+
+                        if(Signed){
+                            int SignLength= dataInputStream.readInt();
+                            byte[] SignatureBytes= new byte[SignLength];
+                            dataInputStream.readFully(SignatureBytes, 0, SignatureBytes.length);
+                            System.out.println("Signature obtained ");
+                            this.signature=SignatureBytes;
+
+                            int usernameLength= dataInputStream.readInt();
+                            byte[] usernameBytes= new byte[usernameLength];
+                            dataInputStream.readFully(usernameBytes, 0, usernameBytes.length);
+                            System.out.println("username obtained ");
+                            this.username=new String(usernameBytes);
+
+
+                        }
                         serverSocket.close();
                         return true;
 
@@ -160,5 +194,9 @@ public class TestReceiver {
 
 
 
+    }
+
+    public byte[] getFileBytes() {
+        return fileBytes;
     }
 }
