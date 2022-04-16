@@ -7,6 +7,8 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.file.Files;
+import java.security.PrivateKey;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 
 public class TestReceiver {
@@ -139,7 +141,7 @@ public class TestReceiver {
             return "No extension found.";
         }
     }
-    public ArrayList<byte[]> receiveEncrypted(){
+    public ArrayList<byte[]> getReceivedEncryptedData(){
         while (true) {
             try {
                 serverSocket = new ServerSocket(5000);
@@ -194,6 +196,22 @@ public class TestReceiver {
 
 
 
+    }
+    public boolean receiveEncrypted(PrivateKey loggedUserPrivateKey){
+
+        ArrayList<byte[]> received=getReceivedEncryptedData();
+        if (received==null)
+            return false;
+        String entityName=new String(received.get(0));
+        String filename= new String(received.get(1));
+        lastFilename=filename;
+        username=entityName;
+        X509Certificate cert= KeyManagement.loadCert(String.join("","certs/",entityName,"cert.ser"));
+        //secretKey=EcFunctions.generateSharedKey(loggedUserPrivateKey,cert.getPublicKey());
+        byte[] decryptedBytes= EcFunctions.decryptByteArray(loggedUserPrivateKey,cert.getPublicKey(),received.get(2),received.get(3),received.get(4));
+        String destination= String.join("","files/",filename);
+        TestReceiver.saveDecryptedFile(destination,decryptedBytes);
+        return true;
     }
 
     public byte[] getFileBytes() {

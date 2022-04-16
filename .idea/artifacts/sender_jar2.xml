@@ -3,9 +3,9 @@
     <output-path>$PROJECT_DIR$/out/artifacts/sender_jar2</output-path>
     <root id="root">
       <element id="archive" name="sender.jar">
-        <element id="module-output" name="sender" />
+        <element id="module-output" name="ECCryptoFileSharer" />
       </element>
-      <element id="file-copy" path="$PROJECT_DIR$/sender/libs/bcprov-jdk15on-167.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/ECCryptoFileSharer/libs/bcprov-jdk15on-167.jar" />
     </root>
   </artifact>
 </component>

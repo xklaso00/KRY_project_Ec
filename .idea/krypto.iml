@@ -8,7 +8,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/sender/libs/bcprov-jdk15on-167.jar!/" />
+          <root url="jar://$MODULE_DIR$/ECCryptoFileSharer/libs/bcprov-jdk15on-167.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

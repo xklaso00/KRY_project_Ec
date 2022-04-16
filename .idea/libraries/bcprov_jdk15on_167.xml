@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="bcprov-jdk15on-167">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/sender/libs/bcprov-jdk15on-167.jar!/" />
+      <root url="jar://$PROJECT_DIR$/ECCryptoFileSharer/libs/bcprov-jdk15on-167.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

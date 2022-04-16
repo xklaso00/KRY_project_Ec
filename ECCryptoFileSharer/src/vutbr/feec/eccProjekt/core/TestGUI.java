@@ -192,11 +192,12 @@ public class TestGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 encRecLabel.setText("Receiving encrypted...");
+
                 SwingWorker<Boolean, Void> worker = new SwingWorker<Boolean, Void>() {
                     @Override
                     protected Boolean doInBackground() throws Exception {
                         System.out.println("Receiving Encrypted");
-                        return receiveEncrypted();
+                        return testReceiver.receiveEncrypted(loggedUserPrivateKey);
                     }
 
                     // GUI can be updated from this method.
@@ -206,7 +207,8 @@ public class TestGUI {
                             status=get();
                             if(status) {
                                 encRecLabel.setText("Receive was successful");
-
+                                JFrame jFrame = new JFrame();
+                                JOptionPane.showMessageDialog(jFrame, String.format("File from %s was decrypted, the file was saved to /files/%s ", testReceiver.getUsername(),testReceiver.lastFilename));
                             }
                             else
                                 encRecLabel.setText("Receive failed");
@@ -302,7 +304,7 @@ public class TestGUI {
             }
         });
     }
-
+    //function to build GUI and initialize some classes
     private void initialize(){
         this.frame= new JFrame();
         frame.setBounds(300,400,650,450);
@@ -312,6 +314,7 @@ public class TestGUI {
         frame.setVisible(true);
         keyManagement= new KeyManagement();
         ecFunctions= new EcFunctions();
+        testReceiver=new TestReceiver();
     }
 
     public static void main(String[] args) {
@@ -319,6 +322,7 @@ public class TestGUI {
 
         new TestGUI();
     }
+    //a function to get a file with file chooser
     public File getFileFromPC(String textToSay){
         File file;
         JFileChooser fileChooser = new JFileChooser();
@@ -331,6 +335,7 @@ public class TestGUI {
         }
         return null;
     }
+    //function to login a user and set some variables that can be used after that
     public void logInUser()
     {
         String usernameTemp=usernameField.getText();
@@ -351,6 +356,7 @@ public class TestGUI {
             usernameField.setText("");
         }
     }
+    //a function that creates encrypted byte array from a file
     public byte[] createEncryptedFileBytes(){
         File fileToEnc= getFileFromPC("Choose file to send");
         File certFile= getFileFromPC("Choose certificate of the user you are sending data to");
@@ -376,20 +382,7 @@ public class TestGUI {
 
         return null;
     }
-    public boolean receiveEncrypted(){
-        testReceiver= new TestReceiver();
-        ArrayList<byte[]> received=testReceiver.receiveEncrypted();
-        if (received==null)
-            return false;
-        String entityName=new String(received.get(0));
-        String filename= new String(received.get(1));
-        X509Certificate cert= keyManagement.loadCert(String.join("","certs/",entityName,"cert.ser"));
-        //secretKey=EcFunctions.generateSharedKey(loggedUserPrivateKey,cert.getPublicKey());
-        byte[] decryptedBytes= ecFunctions.decryptByteArray(loggedUserPrivateKey,cert.getPublicKey(),received.get(2),received.get(3),received.get(4));
-        String destination= String.join("","files/",filename);
-        TestReceiver.saveDecryptedFile(destination,decryptedBytes);
-        return true;
-    }
+
     public boolean receiveSigned(){
         testReceiver = new TestReceiver();
         boolean received =testReceiver.Receive(true);

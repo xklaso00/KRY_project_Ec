@@ -84,7 +84,7 @@ public class KeyManagement {
         return (X509Certificate) privateKeyEntry.getCertificate();
     }*/
     //function that gets you the privateKeyEntry from a file. you need path to file, alias of the entry and a password
-    //it returns the entry, from that you can get cert or private key
+    //it will return null if you have wrong password or something, this can also be uset to loging in as you can check password with this
     public static KeyStore.PrivateKeyEntry getKeyStoreEntry(String path, String alias, char[] password){
         try {
             KeyStore keyStore = KeyStore.getInstance("BKS");
@@ -167,6 +167,7 @@ public class KeyManagement {
         }
 
     }
+    //function for saving cert to certs folder
     public void saveCert(X509Certificate certificate, String name){
         try {
 
@@ -180,10 +181,11 @@ public class KeyManagement {
         }
         catch (IOException e)
         {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
     }
-    public X509Certificate loadCert(String keyFile){
+    //a function for loading cert files
+    public static X509Certificate loadCert(String keyFile){
         //String keyFile = String.join("","certs/",name,"cert.ser");
 
         try

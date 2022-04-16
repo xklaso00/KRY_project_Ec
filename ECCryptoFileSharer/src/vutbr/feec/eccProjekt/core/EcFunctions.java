@@ -58,7 +58,7 @@ public class EcFunctions {
         byte[] signature = ecdsaSignature.sign();
         return signature;
     }
-    //function to verify the signature
+    //function to verify the signature of byte array
     public static boolean verifySignedByteArray(byte[]data,byte[] signature, PublicKey publicKey) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException {
         Signature ecdsaVerify = Signature.getInstance("SHA256withECDSA");
         ecdsaVerify.initVerify(publicKey);
@@ -66,7 +66,7 @@ public class EcFunctions {
         return ecdsaVerify.verify(signature);
 
     }
-    //function to generate key for AES with ECDH we need our PrivateKey and PublicKey of the person we want to share it with
+    //function to generate key for AES not used as it is not needen ECIES does this itself
      public static SecretKey generateSharedKey(PrivateKey APrivateKey, PublicKey BPublicKey) {
          KeyAgreement keyAgreement = null;
          try {
@@ -85,29 +85,17 @@ public class EcFunctions {
      }
     //function to encrypt byte array with shared key
      public byte[] encryptByteArray(PrivateKey privateKey, PublicKey publicKey, byte[] data, byte [] iv)  {
-         //IvParameterSpec ivSpec = new IvParameterSpec(iv);
+
          try {
-        /* Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding","BC");
-
-         cipher.init(Cipher.ENCRYPT_MODE, key, ivSpec);
-         byte[] encrypted = new byte[cipher.getOutputSize(data.length)];
-         int length= cipher.update(data,0,data.length,encrypted);
-         System.out.println("the length var is: "+length);
-         cipher.doFinal(encrypted,length);
-         return encrypted;*/
              // get ECIES cipher objects
-             Cipher acipher = Cipher.getInstance("ECIES","BC");
-
+             Cipher cipher = Cipher.getInstance("ECIES","BC");
              //  generate derivation and encoding vectors
              d = new SecureRandom().generateSeed(8);;
-
              e = iv;
              IESParameterSpec param = new IESParameterSpec(d, e, 256);
+             cipher.init(Cipher.ENCRYPT_MODE, new IEKeySpec(privateKey,publicKey), param);
 
-             // encrypt the plaintext using the public key
-             acipher.init(Cipher.ENCRYPT_MODE, new IEKeySpec(privateKey,publicKey), param);
-
-             return acipher.doFinal(data);
+             return cipher.doFinal(data);
 
 
          }
@@ -116,54 +104,25 @@ public class EcFunctions {
              return null;
          }
      }
-     //function to decrypt byte arr with shared key
-     public byte[] decryptByteArray(PrivateKey privateKey,PublicKey publicKey, byte[] dataToDecrypt,byte[] iv, byte []d) {
+     //function to decrypt byte arr with created KDFed shared key
+     public static byte[] decryptByteArray(PrivateKey privateKey,PublicKey publicKey, byte[] dataToDecrypt,byte[] e, byte []d) {
         try {
-         /*Key decryptionKey = new SecretKeySpec(key.getEncoded(), key.getAlgorithm());
-         IvParameterSpec ivSpec = new IvParameterSpec(iv);
-         Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding","BC");
-         cipher.init(Cipher.DECRYPT_MODE, decryptionKey, ivSpec);
 
-         byte[] decryptedData=new byte[cipher.getOutputSize(dataToDecrypt.length)];
-         int length=cipher.update(dataToDecrypt, 0, dataToDecrypt.length, decryptedData, 0);
-         System.out.println("the length var is: "+length);
-         cipher.doFinal(decryptedData, length);
-         return decryptedData;*/
             Cipher cipher = Cipher.getInstance("ECIES","BC");
-
-            //  generate derivation and encoding vectors
-            this.d = d;
-            e = iv;
-
             IESParameterSpec param = new IESParameterSpec(d, e, 256);
-
-            // decrypt the text using the private key
             cipher.init(Cipher.DECRYPT_MODE, new IEKeySpec(privateKey,publicKey), param);
 
             return cipher.doFinal(dataToDecrypt);
         }
-        catch (Exception e){
-            e.printStackTrace();
+        catch (Exception exception){
+            exception.printStackTrace();
             return null;
         }
 
      }
 
 
-    public static KeyPair generateSecKey() throws NoSuchProviderException, NoSuchAlgorithmException, InvalidAlgorithmParameterException {
-
-        KeyPairGenerator g = KeyPairGenerator.getInstance("EC","BC");
-        String  curveName="secp256r1";
-
-        g.initialize(new ECGenParameterSpec(curveName), new SecureRandom());
-        KeyPair aKeyPair = g.generateKeyPair();
-        //ECPrivateKey SecKeyA= (ECPrivateKey)aKeyPair.getPrivate();
-
-        //ECPublicKey PubKeyA= (ECPublicKey)aKeyPair.getPublic();
-        return aKeyPair;
-
-
-    }
+    //a function for signing a file with private key
     public static byte[] SignFile(File file,PrivateKey privateKey){
         try {
             FileInputStream fileInputStream = new FileInputStream(file.getAbsolutePath());
