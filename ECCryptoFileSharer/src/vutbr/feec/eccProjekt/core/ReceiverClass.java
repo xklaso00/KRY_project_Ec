@@ -1,25 +1,22 @@
 package vutbr.feec.eccProjekt.core;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.file.Files;
 import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 
-public class TestReceiver {
+public class ReceiverClass {
     ServerSocket serverSocket;
     static ArrayList<MyFile> myFiles = new ArrayList<>();
     private byte[] signature=null;
     private String username;
     private byte [] fileBytes=null;
     protected String lastFilename;
+    protected String lastLocation;
     int fileId = 0;
-    public TestReceiver(){
+    public ReceiverClass(){
 
     }
 
@@ -59,29 +56,19 @@ public class TestReceiver {
         }
         if(extension.equals("ser")){
             fileDest= String.join("","certs/",myFiles.get(fileId-1).getName());
+            lastLocation="certs";
         }
-        else
-            fileDest= String.join("","files/",myFiles.get(fileId-1).getName());
-
+        else {
+            fileDest = String.join("", "files/", myFiles.get(fileId - 1).getName());
+            lastLocation="files";
+        }
         //System.out.println(Utils.bytesToHex(myFiles.get(0).getData()));
         try (FileOutputStream stream = new FileOutputStream(fileDest)) {
             stream.write(myFiles.get(0).getData());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /*try {
 
-            FileOutputStream fileOutputStream= new FileOutputStream(fileDest);
-            fileOutputStream.write(myFiles.get(0).getData());
-            fileOutputStream.close();
-
-            //Files.createFile()
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
     }
     public boolean Receive(boolean Signed){
         while (true) {
@@ -210,7 +197,7 @@ public class TestReceiver {
         //secretKey=EcFunctions.generateSharedKey(loggedUserPrivateKey,cert.getPublicKey());
         byte[] decryptedBytes= EcFunctions.decryptByteArray(loggedUserPrivateKey,cert.getPublicKey(),received.get(2),received.get(3),received.get(4));
         String destination= String.join("","files/",filename);
-        TestReceiver.saveDecryptedFile(destination,decryptedBytes);
+        ReceiverClass.saveDecryptedFile(destination,decryptedBytes);
         return true;
     }
 

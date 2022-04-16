@@ -3,6 +3,7 @@ package vutbr.feec.eccProjekt.core;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
@@ -28,6 +29,19 @@ public class RegisterForm {
                 System.out.println(usernameString);
                 char[] password= passwordField.getPassword();
                 char [] masterPassword = masterPasswordField.getPassword();
+                File tempFile = new File(String.join("","certs/",usernameString));
+                if(password.length==0|| usernameString.length()==0){
+                    JFrame jFrame = new JFrame();
+                    JOptionPane.showMessageDialog(jFrame,"Password or username can't be blank.");
+                    return;
+                }
+                if(tempFile.exists()){
+                    JFrame jFrame = new JFrame();
+                    JOptionPane.showMessageDialog(jFrame,"this username is already taken.");
+                    return;
+                }
+
+
                 KeyPair keyPair = EcFunctions.generateKeyPair();
                 int result=keyManagement.saveClientKey(keyPair,password,usernameString,masterPassword);
                 if (result==0)
@@ -43,7 +57,7 @@ public class RegisterForm {
 
 
     private void initialize(){
-        this.frame= new JFrame();
+        this.frame= new JFrame("Register");
         frame.setBounds(500,200,500,400);
         frame.setContentPane(mainPanel);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

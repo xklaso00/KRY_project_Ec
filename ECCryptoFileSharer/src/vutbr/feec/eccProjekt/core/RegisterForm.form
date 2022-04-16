@@ -36,7 +36,7 @@
         <properties>
           <horizontalAlignment value="0"/>
           <horizontalTextPosition value="0"/>
-          <text value="username"/>
+          <text value="Username"/>
         </properties>
       </component>
       <component id="6c066" class="javax.swing.JLabel">

@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.security.*;
 import java.security.cert.X509Certificate;
-import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class TestGUI {
@@ -36,11 +35,13 @@ public class TestGUI {
     private JButton receiveSignedFileButton;
     private JLabel signedSendLabel;
     private JLabel signedReceiveLabel;
+    private JButton helpButton;
     private JFrame frame;
     RegisterForm registerForm;
     KeyManagement keyManagement;
     //private TestProcess process;
     private String loggedUserName;
+    private boolean loggedIn=false;
     private char[] loggedUserPassword;
     private PrivateKey loggedUserPrivateKey;
     private byte[] lastIV;
@@ -48,7 +49,8 @@ public class TestGUI {
     private String lastFileName;
     private String targetIPaddress ="localhost";
     EcFunctions ecFunctions;
-    TestReceiver testReceiver;
+    ReceiverClass receiverClass;
+    HelpGUI helpGUI;
     public TestGUI(){
         this.initialize();
 
@@ -84,11 +86,11 @@ public class TestGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 File fileToSend= getFileFromPC("Choose file to send");
-                TestSender testSender= new TestSender(fileToSend.getAbsolutePath());
+                SenderClass senderClass = new SenderClass(fileToSend.getAbsolutePath());
                 SwingWorker<Boolean, Void> worker = new SwingWorker<Boolean, Void>() {
                     @Override
                     protected Boolean doInBackground() throws Exception {
-                        return testSender.sendFile(fileToSend, targetIPaddress,null,loggedUserName);
+                        return senderClass.sendFile(fileToSend, targetIPaddress,null,loggedUserName);
                     }
 
                     // GUI can be updated from this method.
@@ -117,13 +119,14 @@ public class TestGUI {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                TestReceiver testReceiver= new TestReceiver();
+                ReceiverClass receiverClass = new ReceiverClass();
+
                 receiveWasSuccessful.setText("Receiving in progress");
                 SwingWorker<Boolean, Void> worker = new SwingWorker<Boolean, Void>() {
                     @Override
                     protected Boolean doInBackground() throws Exception {
                         System.out.println("Receiving");
-                        return testReceiver.Receive(false);
+                        return receiverClass.Receive(false);
                     }
 
                     // GUI can be updated from this method.
@@ -133,7 +136,8 @@ public class TestGUI {
                             status=get();
                             if(status) {
                                 receiveWasSuccessful.setText("Receive was successful");
-                                testReceiver.saveFile();
+                                receiverClass.saveFile();
+                                showDialogWindow(String.format("The file was saved to %s/%s ", receiverClass.lastLocation, receiverClass.lastFilename));
                             }
                             else
                                 receiveWasSuccessful.setText("Receive failed");
@@ -158,12 +162,16 @@ public class TestGUI {
         sendEncryptedFileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(!loggedIn){
+                    showDialogWindow("You must be logged in!");
+                    return;
+                }
                 byte[] encrypted= createEncryptedFileBytes();
 
                 SwingWorker<Boolean, Void> worker = new SwingWorker<Boolean, Void>() {
                     @Override
                     protected Boolean doInBackground() throws Exception {
-                        return TestSender.sendEncFile(lastFileName,encrypted,lastIV,loggedUserName, targetIPaddress,ecFunctions.getD());
+                        return SenderClass.sendEncFile(lastFileName,encrypted,lastIV,loggedUserName, targetIPaddress,ecFunctions.getD());
                     }
 
                     // GUI can be updated from this method.
@@ -191,13 +199,17 @@ public class TestGUI {
         receiveEncryptedFileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(!loggedIn){
+                    showDialogWindow("You must be logged in!");
+                    return;
+                }
                 encRecLabel.setText("Receiving encrypted...");
 
                 SwingWorker<Boolean, Void> worker = new SwingWorker<Boolean, Void>() {
                     @Override
                     protected Boolean doInBackground() throws Exception {
                         System.out.println("Receiving Encrypted");
-                        return testReceiver.receiveEncrypted(loggedUserPrivateKey);
+                        return receiverClass.receiveEncrypted(loggedUserPrivateKey);
                     }
 
                     // GUI can be updated from this method.
@@ -207,8 +219,7 @@ public class TestGUI {
                             status=get();
                             if(status) {
                                 encRecLabel.setText("Receive was successful");
-                                JFrame jFrame = new JFrame();
-                                JOptionPane.showMessageDialog(jFrame, String.format("File from %s was decrypted, the file was saved to /files/%s ", testReceiver.getUsername(),testReceiver.lastFilename));
+                                showDialogWindow(String.format("File from %s was decrypted, the file was saved to /files/%s ", receiverClass.getUsername(), receiverClass.lastFilename));
                             }
                             else
                                 encRecLabel.setText("Receive failed");
@@ -235,13 +246,17 @@ public class TestGUI {
         sendSignedFileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(!loggedIn){
+                    showDialogWindow("You must be logged in!");
+                    return;
+                }
                 File fileToSend= getFileFromPC("Choose file to send");
-                TestSender testSender= new TestSender(fileToSend.getAbsolutePath());
+                SenderClass senderClass = new SenderClass(fileToSend.getAbsolutePath());
                 byte []signature=EcFunctions.SignFile(fileToSend,loggedUserPrivateKey);
                 SwingWorker<Boolean, Void> worker = new SwingWorker<Boolean, Void>() {
                     @Override
                     protected Boolean doInBackground() throws Exception {
-                        return testSender.sendFile(fileToSend, targetIPaddress,signature,loggedUserName);
+                        return senderClass.sendFile(fileToSend, targetIPaddress,signature,loggedUserName);
                     }
 
                     // GUI can be updated from this method.
@@ -271,6 +286,10 @@ public class TestGUI {
         receiveSignedFileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(!loggedIn){
+                    showDialogWindow("You must be logged in!");
+                    return;
+                }
                 signedReceiveLabel.setText("Receiving signed file...");
                 SwingWorker<Boolean, Void> worker = new SwingWorker<Boolean, Void>() {
                     @Override
@@ -286,8 +305,7 @@ public class TestGUI {
                             status=get();
                             if(status) {
                                 signedReceiveLabel.setText("Receive was successful");
-                                JFrame jFrame = new JFrame();
-                                JOptionPane.showMessageDialog(jFrame, String.format("Signature of the file from %s is legit, the file was saved to /files/%s ", testReceiver.getUsername(),testReceiver.lastFilename));
+                                showDialogWindow(String.format("Signature of the file from %s is legit, the file was saved to /files/%s ", receiverClass.getUsername(), receiverClass.lastFilename));
                             }
                             else
                                 signedReceiveLabel.setText("Receive failed");
@@ -303,18 +321,24 @@ public class TestGUI {
                 worker.execute();
             }
         });
+        helpButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                helpGUI=new HelpGUI();
+            }
+        });
     }
     //function to build GUI and initialize some classes
     private void initialize(){
-        this.frame= new JFrame();
-        frame.setBounds(300,400,650,450);
+        this.frame= new JFrame("EC Crypto File Sharer");
+        frame.setBounds(300,50,650,450);
         frame.setContentPane(MainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //process= new TestProcess();
         frame.setVisible(true);
         keyManagement= new KeyManagement();
         ecFunctions= new EcFunctions();
-        testReceiver=new TestReceiver();
+        receiverClass =new ReceiverClass();
     }
 
     public static void main(String[] args) {
@@ -354,6 +378,7 @@ public class TestGUI {
             userLogedInLabel.setText("Logged In as: "+loggedUserName);
             userPasswordField.setText("");
             usernameField.setText("");
+            loggedIn=true;
         }
     }
     //a function that creates encrypted byte array from a file
@@ -384,18 +409,18 @@ public class TestGUI {
     }
 
     public boolean receiveSigned(){
-        testReceiver = new TestReceiver();
-        boolean received =testReceiver.Receive(true);
+        receiverClass = new ReceiverClass();
+        boolean received = receiverClass.Receive(true);
         if(!received)
             return false;
-        String entityName= testReceiver.getUsername();
+        String entityName= receiverClass.getUsername();
         X509Certificate cert= keyManagement.loadCert(String.join("","certs/",entityName,"cert.ser"));
-        byte []fileBytes=testReceiver.getFileBytes();
+        byte []fileBytes= receiverClass.getFileBytes();
 
         try {
-            boolean legitSignature = EcFunctions.verifySignedByteArray(fileBytes,testReceiver.getSignature(),cert.getPublicKey());
+            boolean legitSignature = EcFunctions.verifySignedByteArray(fileBytes, receiverClass.getSignature(),cert.getPublicKey());
             if(legitSignature){
-                testReceiver.saveFile();
+                receiverClass.saveFile();
                 return true;
             }
             return false;
@@ -405,6 +430,11 @@ public class TestGUI {
         }
 
 
+    }
+    //simple function for popup window
+    public void showDialogWindow(String text){
+        JFrame jFrame = new JFrame();
+        JOptionPane.showMessageDialog(jFrame,text);
     }
 
 }

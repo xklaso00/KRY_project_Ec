@@ -4,14 +4,14 @@ import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class TestSender {
+public class SenderClass {
     private String path;
 
     public void setPath(String path) {
         this.path = path;
     }
 
-    public TestSender(String path){
+    public SenderClass(String path){
         this.path=path;
     }
     public boolean sendFile(File fileToSend,String address, byte[] Signature, String username){
