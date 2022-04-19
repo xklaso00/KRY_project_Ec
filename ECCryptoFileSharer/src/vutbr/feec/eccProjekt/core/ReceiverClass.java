@@ -16,8 +16,13 @@ public class ReceiverClass {
     protected String lastFilename;
     protected String lastLocation;
     int fileId = 0;
+    private int lastReturnCode=0;
     public ReceiverClass(){
 
+    }
+
+    public int getLastReturnCode() {
+        return lastReturnCode;
     }
 
     public byte[] getSignature() {
@@ -64,7 +69,8 @@ public class ReceiverClass {
         }
         //System.out.println(Utils.bytesToHex(myFiles.get(0).getData()));
         try (FileOutputStream stream = new FileOutputStream(fileDest)) {
-            stream.write(myFiles.get(0).getData());
+            stream.write(myFiles.get(fileId-1).getData());
+            System.out.println("file saved to "+lastLocation+"/"+myFiles.get(fileId-1).getName());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -105,7 +111,16 @@ public class ReceiverClass {
                             System.out.println("username obtained ");
                             this.username=new String(usernameBytes);
 
-
+                            int CertLength= dataInputStream.readInt();
+                            byte[] CertBytes= new byte[CertLength];
+                            dataInputStream.readFully(CertBytes, 0, CertBytes.length);
+                            System.out.println("Cert obtained");
+                            String CertName=String.join("",username,"cert.ser");
+                            myFiles.add(new MyFile(fileId, CertName, CertBytes, getFileExtension(CertName)));
+                            fileId++;
+                            saveFile();
+                            fileId--;
+                            myFiles.remove(fileId);
                         }
                         serverSocket.close();
                         return true;
@@ -142,6 +157,7 @@ public class ReceiverClass {
                     dataInputStream.readFully(usernameBytes, 0, usernameBytes.length);
                     //String fileName = new String(fileNameBytes);
                     System.out.println("username: "+new String(usernameBytes));
+                    username= new String(usernameBytes);
 
                     int fileNameLength= dataInputStream.readInt();
                     byte[] fileNameBytes= new byte[fileNameLength];
@@ -162,6 +178,17 @@ public class ReceiverClass {
                     byte[] dBytes= new byte[dLength];
                     dataInputStream.readFully(dBytes, 0, dBytes.length);
                     System.out.println("length of d is "+dLength);
+
+                    int CertLength= dataInputStream.readInt();
+                    byte[] CertBytes= new byte[CertLength];
+                    dataInputStream.readFully(CertBytes, 0, CertBytes.length);
+                    System.out.println("Cert obtained");
+                    String CertName=String.join("",username,"cert.ser");
+                    myFiles.add(new MyFile(fileId, CertName, CertBytes, getFileExtension(CertName)));
+                    fileId++;
+                    saveFile();
+                    fileId--;
+                    myFiles.remove(fileId);
 
                     ArrayList<byte[]> returnList= new ArrayList<>();
                     returnList.add(usernameBytes);
@@ -193,12 +220,42 @@ public class ReceiverClass {
         String filename= new String(received.get(1));
         lastFilename=filename;
         username=entityName;
+
+
         X509Certificate cert= KeyManagement.loadCert(String.join("","certs/",entityName,"cert.ser"));
         //secretKey=EcFunctions.generateSharedKey(loggedUserPrivateKey,cert.getPublicKey());
         byte[] decryptedBytes= EcFunctions.decryptByteArray(loggedUserPrivateKey,cert.getPublicKey(),received.get(2),received.get(3),received.get(4));
         String destination= String.join("","files/",filename);
         ReceiverClass.saveDecryptedFile(destination,decryptedBytes);
         return true;
+    }
+    public boolean receiveSigned(){
+        boolean received = Receive(true);
+        if(!received) {
+            lastReturnCode=1;//code one means something went wrong during receiving
+            return false;
+        }
+        X509Certificate cert=KeyManagement.loadCert(String.join("","certs/",username,"cert.ser"));
+        if(!KeyManagement.verifyCert(cert)){
+            lastReturnCode=2; //code 2 means cert is not legit
+            return false;
+        }
+        try {
+            boolean legitSignature = EcFunctions.verifySignedByteArray(fileBytes, signature,cert.getPublicKey());
+            if(legitSignature){
+                saveFile();
+                lastReturnCode=0;
+                return true;
+            }
+            else {
+                lastReturnCode=3;//code 3 means nt legit signature
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            lastReturnCode=4;//code4 means error in verify
+            return false;
+        }
     }
 
     public byte[] getFileBytes() {

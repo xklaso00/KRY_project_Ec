@@ -209,7 +209,7 @@ public class KeyManagement {
 
 
     //verify the cert with ca key
-    public boolean verifyCert(X509Certificate c){
+    public static boolean verifyCert(X509Certificate c){
         //KeyStore.PrivateKeyEntry CAKeyEntry=getKeyStoreEntry("certs/CAKS","caEntry","B3tt3rP4ssW0rd".toCharArray());
 
 

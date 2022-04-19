@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="sender:jar" />
+      <artifact name="sender:jar2" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -27,42 +27,16 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80c88752-2ee7-4df9-b233-125892195a17" name="Changes" comment="Some cleanup and renaming, removing of not needed files/ module">
-      <change afterPath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/HelpGUI.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/HelpGUI.java" afterDir="false" />
+    <list default="true" id="80c88752-2ee7-4df9-b233-125892195a17" name="Changes" comment="added some checks and help window">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/RegisterForm.form" beforeDir="false" afterPath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/RegisterForm.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/RegisterForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/RegisterForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/Sender.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/TestGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/TestGUI.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/HelpGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/HelpGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/KeyManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/KeyManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/ReceiverClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/ReceiverClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/SenderClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/SenderClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/TestGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/TestGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/TestReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/ReceiverClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/TestSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/SenderClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/sender_jar/sender.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/sender_jar/sender.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/EcFunctions.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/KeyManagement.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/MyFile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/RegisterForm$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/RegisterForm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/Sender$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/Sender$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/Sender.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$3$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$4$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$6$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$7$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI$7.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestGUI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestReceiver.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/TestSender.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/sender/vutbr/feec/eccProjekt/core/Utils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/testtxt.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/sender_jar2/certs/mifu" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/sender_jar2/sender.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/sender_jar2/sender.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,19 +133,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.TestGUI" />
@@ -201,7 +162,10 @@
       <workItem from="1649947615007" duration="6388000" />
       <workItem from="1650044772754" duration="3557000" />
       <workItem from="1650102174817" duration="2127000" />
-      <workItem from="1650117202965" duration="5179000" />
+      <workItem from="1650117202965" duration="5305000" />
+      <workItem from="1650368924221" duration="2883000" />
+      <workItem from="1650372730456" duration="158000" />
+      <workItem from="1650384847082" duration="1770000" />
     </task>
     <task id="LOCAL-00001" summary="Started working on keyManagement, saving keys and certs with KeyStore, for now the &quot;CA&quot; key and cert saving/loading should work, but still in testing phase">
       <created>1649077790080</created>
@@ -315,7 +279,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650104267918</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="added some checks and help window">
+      <created>1650123030326</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1650123030326</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -347,14 +318,15 @@
     <MESSAGE value="added option to choose IP (tested on local network and it should work)&#10;changed encryption and decryption to be more in live with ECIES (we now dont need the functions to create shared key, it does it itself pretty much)" />
     <MESSAGE value="Added option to send signed files, you need the cert of the sender on the other side first." />
     <MESSAGE value="Some cleanup and renaming, removing of not needed files/ module" />
-    <option name="LAST_COMMIT_MESSAGE" value="Some cleanup and renaming, removing of not needed files/ module" />
+    <MESSAGE value="added some checks and help window" />
+    <option name="LAST_COMMIT_MESSAGE" value="added some checks and help window" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="612" y="179" key="#com.intellij.ide.util.MemberChooser" timestamp="1650119905740">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser" timestamp="1650385952448">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="612" y="179" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1650119905740" />
-    <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1649949981835" />
+    <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1650385952448" />
     <state x="690" y="310" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1649778419418">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -377,35 +349,35 @@
     </state>
     <state x="592" y="218" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1648917120177" />
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1649778430137" />
-    <state width="1493" height="208" key="GridCell.Tab.0.bottom" timestamp="1650122854887">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1877" height="278" key="GridCell.Tab.0.bottom" timestamp="1650386475928">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1493" height="208" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1650122854887" />
-    <state width="1877" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1649953121690" />
-    <state width="1493" height="208" key="GridCell.Tab.0.center" timestamp="1650122854887">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1493" height="208" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1650123043848" />
+    <state width="1877" height="278" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1650386475928" />
+    <state width="1877" height="278" key="GridCell.Tab.0.center" timestamp="1650386475928">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1493" height="208" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1650122854887" />
-    <state width="1877" height="281" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1649953121689" />
-    <state width="1493" height="208" key="GridCell.Tab.0.left" timestamp="1650122854886">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1493" height="208" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1650123043848" />
+    <state width="1877" height="278" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1650386475928" />
+    <state width="1877" height="278" key="GridCell.Tab.0.left" timestamp="1650386475928">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1493" height="208" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1650122854886" />
-    <state width="1877" height="281" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1649953121689" />
-    <state width="1493" height="208" key="GridCell.Tab.0.right" timestamp="1650122854887">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1493" height="208" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1650123043848" />
+    <state width="1877" height="278" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1650386475928" />
+    <state width="1877" height="278" key="GridCell.Tab.0.right" timestamp="1650386475928">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1493" height="208" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1650122854887" />
-    <state width="1877" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1649953121689" />
-    <state x="352" y="0" key="SettingsEditor" timestamp="1650122917285">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1493" height="208" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1650123043848" />
+    <state width="1877" height="278" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1650386475928" />
+    <state x="440" y="94" key="SettingsEditor" timestamp="1650386635221">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="352" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1650122917285" />
-    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1649953558483" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1650104270599">
+    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1650386635221" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1650123033332">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1650104270599" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1650123033332" />
     <state x="451" y="183" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1649953712933" />
     <state x="209" y="33" key="new project wizard" timestamp="1648917137676">
       <screen x="0" y="0" width="1536" height="824" />

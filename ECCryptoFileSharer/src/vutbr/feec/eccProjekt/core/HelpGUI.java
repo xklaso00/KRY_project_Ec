@@ -27,8 +27,7 @@ public class HelpGUI {
                 "On the sending side tap the Send encrypted button, then choose a file to send, and then choose the certificate of the receiver.\n" +
                 "You should receive the file on the other side and it should be decrypted.");
         textPane3.setEditable(false);
-        textPane4.setText("You must be logged in to send / receive signed files.\n" +
-                "First make sure you have the senders certificate on the receiving side (can use the send option for this).\n" +
+        textPane4.setText("You must be logged in to send signed files.\n" +
                 "Then tap the Receive Signed File button on the receiving side.\n" +
                 "Then tap the Send Signed File on the sender Side.\n" +
                 "You should get the file on the receiving side with conformation of the signature.");

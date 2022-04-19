@@ -1,5 +1,7 @@
 package vutbr.feec.eccProjekt.core;
 
+
+
 import javax.crypto.SecretKey;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -286,16 +288,17 @@ public class TestGUI {
         receiveSignedFileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(!loggedIn){
+               /* if(!loggedIn){
                     showDialogWindow("You must be logged in!");
                     return;
-                }
+                }*/
                 signedReceiveLabel.setText("Receiving signed file...");
                 SwingWorker<Boolean, Void> worker = new SwingWorker<Boolean, Void>() {
                     @Override
                     protected Boolean doInBackground() throws Exception {
                         System.out.println("Receiving Signed");
-                        return receiveSigned();
+                        receiverClass= new ReceiverClass();
+                        return receiverClass.receiveSigned();
                     }
 
                     // GUI can be updated from this method.
@@ -307,8 +310,16 @@ public class TestGUI {
                                 signedReceiveLabel.setText("Receive was successful");
                                 showDialogWindow(String.format("Signature of the file from %s is legit, the file was saved to /files/%s ", receiverClass.getUsername(), receiverClass.lastFilename));
                             }
-                            else
-                                signedReceiveLabel.setText("Receive failed");
+                            else {
+                                if(receiverClass.getLastReturnCode()==1)
+                                    signedReceiveLabel.setText("Something went wrong during receiving");
+                                else if(receiverClass.getLastReturnCode()==2)
+                                    signedReceiveLabel.setText("Could not verify certificate");
+                                else if(receiverClass.getLastReturnCode()==3)
+                                    signedReceiveLabel.setText("Signature could not be verified");
+                                else
+                                    signedReceiveLabel.setText("Something went wrong");
+                            }
                             return;
                         } catch (InterruptedException e) {
                             e.printStackTrace();
@@ -408,7 +419,7 @@ public class TestGUI {
         return null;
     }
 
-    public boolean receiveSigned(){
+    /*public boolean receiveSigned(){
         receiverClass = new ReceiverClass();
         boolean received = receiverClass.Receive(true);
         if(!received)
@@ -430,7 +441,7 @@ public class TestGUI {
         }
 
 
-    }
+    }*/
     //simple function for popup window
     public void showDialogWindow(String text){
         JFrame jFrame = new JFrame();
