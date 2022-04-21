@@ -28,14 +28,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80c88752-2ee7-4df9-b233-125892195a17" name="Changes" comment="added some checks and help window">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/HelpGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/HelpGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CAKS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ECCryptoFileSharer/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/ECCryptoFileSharer/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/EcFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/EcFunctions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/KeyManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/KeyManagement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/ReceiverClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/ReceiverClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/SenderClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/SenderClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/TestGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/TestGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/testtxt.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/sender_jar2/certs/mifu" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/TestGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/MainGUI.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/TestGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/MainGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/TestMain.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/ECCryptoFileSharer/src/vutbr/feec/eccProjekt/core/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/certs/kita" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/sender_jar/sender.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/sender_jar/sender.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/sender_jar2/sender.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/sender_jar2/sender.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -80,7 +86,20 @@
       <recent name="vutbr.feec.eccProjekt.core" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TestGUI">
+  <component name="RunManager" selected="Application.MainGUI">
+    <configuration name="MainGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="vutbr.feec.eccProjekt.core.MainGUI" />
+      <module name="ECCryptoFileSharer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="vutbr.feec.eccProjekt.core.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ReceiverClass" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="vutbr.feec.eccProjekt.core.ReceiverClass" />
       <module name="ECCryptoFileSharer" />
@@ -107,19 +126,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="vutbr.feec.eccProjekt.core.TestGUI" />
-      <module name="ECCryptoFileSharer" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="vutbr.feec.eccProjekt.core.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TestMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="vutbr.feec.eccProjekt.core.TestMain" />
       <module name="ECCryptoFileSharer" />
@@ -135,7 +141,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TestGUI" />
+        <item itemvalue="Application.MainGUI" />
         <item itemvalue="Application.TestMain" />
         <item itemvalue="Application.ReceiverClass" />
         <item itemvalue="Application.Sender" />
@@ -165,7 +171,11 @@
       <workItem from="1650117202965" duration="5305000" />
       <workItem from="1650368924221" duration="2883000" />
       <workItem from="1650372730456" duration="158000" />
-      <workItem from="1650384847082" duration="1770000" />
+      <workItem from="1650384847082" duration="1931000" />
+      <workItem from="1650454174220" duration="6032000" />
+      <workItem from="1650525724575" duration="2604000" />
+      <workItem from="1650528731183" duration="653000" />
+      <workItem from="1650557748881" duration="549000" />
     </task>
     <task id="LOCAL-00001" summary="Started working on keyManagement, saving keys and certs with KeyStore, for now the &quot;CA&quot; key and cert saving/loading should work, but still in testing phase">
       <created>1649077790080</created>
@@ -286,7 +296,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650123030326</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Sender now sends his cert with encrypted and signed message, so the reciever does not have to have the cert already. some minor changes in some functions and some small fixes.">
+      <created>1650386784597</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1650386784597</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -319,7 +336,8 @@
     <MESSAGE value="Added option to send signed files, you need the cert of the sender on the other side first." />
     <MESSAGE value="Some cleanup and renaming, removing of not needed files/ module" />
     <MESSAGE value="added some checks and help window" />
-    <option name="LAST_COMMIT_MESSAGE" value="added some checks and help window" />
+    <MESSAGE value="Sender now sends his cert with encrypted and signed message, so the reciever does not have to have the cert already. some minor changes in some functions and some small fixes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Sender now sends his cert with encrypted and signed message, so the reciever does not have to have the cert already. some minor changes in some functions and some small fixes." />
   </component>
   <component name="WindowStateProjectService">
     <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser" timestamp="1650385952448">
@@ -331,11 +349,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="310" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1649778419418" />
-    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1650119333126">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="347" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1650527555223">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1650119333126" />
-    <state x="362" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1649160964056" />
+    <state x="347" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1650527555223" />
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1649155151978">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -349,36 +367,36 @@
     </state>
     <state x="592" y="218" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1648917120177" />
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1649778430137" />
-    <state width="1877" height="278" key="GridCell.Tab.0.bottom" timestamp="1650386475928">
+    <state width="1877" height="278" key="GridCell.Tab.0.bottom" timestamp="1650530162212">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="208" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1650123043848" />
-    <state width="1877" height="278" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1650386475928" />
-    <state width="1877" height="278" key="GridCell.Tab.0.center" timestamp="1650386475928">
+    <state width="1877" height="278" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1650530162212" />
+    <state width="1877" height="278" key="GridCell.Tab.0.center" timestamp="1650530162212">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="208" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1650123043848" />
-    <state width="1877" height="278" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1650386475928" />
-    <state width="1877" height="278" key="GridCell.Tab.0.left" timestamp="1650386475928">
+    <state width="1877" height="278" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1650530162212" />
+    <state width="1877" height="278" key="GridCell.Tab.0.left" timestamp="1650530162212">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="208" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1650123043848" />
-    <state width="1877" height="278" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1650386475928" />
-    <state width="1877" height="278" key="GridCell.Tab.0.right" timestamp="1650386475928">
+    <state width="1877" height="278" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1650530162212" />
+    <state width="1877" height="278" key="GridCell.Tab.0.right" timestamp="1650530162212">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="208" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1650123043848" />
-    <state width="1877" height="278" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1650386475928" />
-    <state x="440" y="94" key="SettingsEditor" timestamp="1650386635221">
+    <state width="1877" height="278" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1650530162212" />
+    <state x="440" y="94" key="SettingsEditor" timestamp="1650528768198">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="352" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1650122917285" />
-    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1650386635221" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1650123033332">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1650528768198" />
+    <state x="451" y="183" key="Vcs.Push.Dialog.v2" timestamp="1650386789756">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1650123033332" />
-    <state x="451" y="183" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1649953712933" />
+    <state x="451" y="183" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1650386789756" />
     <state x="209" y="33" key="new project wizard" timestamp="1648917137676">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

@@ -36,7 +36,7 @@ public class ReceiverClass {
     public String getUsername() {
         return username;
     }
-
+    //saves decrypted bytes to file, save file could be used but receiveEncrypted function was designed differently so, sorry :/
     public static void saveDecryptedFile(String destination, byte[] fileBytes){
         File directory = new File("files/");
         if (! directory.exists()){
@@ -49,12 +49,12 @@ public class ReceiverClass {
             e.printStackTrace();
         }
     }
-
+    //saves the last file in myFiles, if the extension is ser it is a certificate if not save it to files
     public void saveFile(){
         String extension= myFiles.get(fileId-1).getFileExtension();
         System.out.println(extension);
         String fileDest;
-        File directory = new File("files/");
+        File directory = new File("files/");//if files folder is not there create it
         if (! directory.exists()){
             directory.mkdir();
 
@@ -223,6 +223,10 @@ public class ReceiverClass {
 
 
         X509Certificate cert= KeyManagement.loadCert(String.join("","certs/",entityName,"cert.ser"));
+        if(!KeyManagement.verifyCert(cert)){
+            lastReturnCode=2; //code 2 means cert is not legit
+            return false;
+        }
         //secretKey=EcFunctions.generateSharedKey(loggedUserPrivateKey,cert.getPublicKey());
         byte[] decryptedBytes= EcFunctions.decryptByteArray(loggedUserPrivateKey,cert.getPublicKey(),received.get(2),received.get(3),received.get(4));
         String destination= String.join("","files/",filename);

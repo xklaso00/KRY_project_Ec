@@ -223,7 +223,7 @@ public class KeyManagement {
             return false;
         }
     }
-    //just a function to print some basic things about a cert
+    //just a function to print some basic things about a cert for testing
     public void printCert(X509Certificate c){
        /* try {
             CertificateFactory cf = CertificateFactory.getInstance("X509");

@@ -12,7 +12,7 @@ import java.security.*;
 import java.security.cert.X509Certificate;
 import java.util.concurrent.ExecutionException;
 
-public class TestGUI {
+public class MainGUI {
     private JPanel MainPanel;
     private JButton registerButton;
     private JButton verifyCertificateButton;
@@ -46,14 +46,14 @@ public class TestGUI {
     private boolean loggedIn=false;
     private char[] loggedUserPassword;
     private PrivateKey loggedUserPrivateKey;
-    private byte[] lastIV;
+
     SecretKey secretKey;
     private String lastFileName;
     private String targetIPaddress ="localhost";
     EcFunctions ecFunctions;
     ReceiverClass receiverClass;
     HelpGUI helpGUI;
-    public TestGUI(){
+    public MainGUI(){
         this.initialize();
 
 
@@ -173,7 +173,7 @@ public class TestGUI {
                 SwingWorker<Boolean, Void> worker = new SwingWorker<Boolean, Void>() {
                     @Override
                     protected Boolean doInBackground() throws Exception {
-                        return SenderClass.sendEncFile(lastFileName,encrypted,lastIV,loggedUserName, targetIPaddress,ecFunctions.getD());
+                        return SenderClass.sendEncFile(lastFileName,encrypted,ecFunctions.getE(),loggedUserName, targetIPaddress,ecFunctions.getD());
                     }
 
                     // GUI can be updated from this method.
@@ -355,7 +355,7 @@ public class TestGUI {
     public static void main(String[] args) {
         Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
 
-        new TestGUI();
+        new MainGUI();
     }
     //a function to get a file with file chooser
     public File getFileFromPC(String textToSay){
@@ -407,8 +407,9 @@ public class TestGUI {
             X509Certificate cert= keyManagement.loadCert(certFile.getAbsolutePath());
             PublicKey publicKey= cert.getPublicKey();
             //secretKey= EcFunctions.generateSharedKey(loggedUserPrivateKey,publicKey);
-            lastIV=new SecureRandom().generateSeed(8);
-            byte[] encryptedBytes= ecFunctions.encryptByteArray(loggedUserPrivateKey,publicKey,fileContentBytes,lastIV);
+
+            byte[] encryptedBytes= ecFunctions.encryptByteArray(loggedUserPrivateKey,publicKey,fileContentBytes);
+
             return encryptedBytes;
 
         } catch (Exception e) {

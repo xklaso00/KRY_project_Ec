@@ -35,7 +35,7 @@ public class EcFunctions {
         this.e = e;
     }
 
-    //function for generating keys, the keys can later be converted into byte[] for transportation
+    //function for generating keys over secp256r1
     public static KeyPair generateKeyPair(){
 
         ECGenParameterSpec ecSpec = new ECGenParameterSpec("secp256r1");
@@ -84,23 +84,19 @@ public class EcFunctions {
 
      }
     //function to encrypt byte array with shared key
-     public byte[] encryptByteArray(PrivateKey privateKey, PublicKey publicKey, byte[] data, byte [] iv)  {
-
+     public byte[] encryptByteArray(PrivateKey privateKey, PublicKey publicKey, byte[] data)  {
          try {
-             // get ECIES cipher objects
+             // get ECIES cipher object
              Cipher cipher = Cipher.getInstance("ECIES","BC");
              //  generate derivation and encoding vectors
-             d = new SecureRandom().generateSeed(8);;
-             e = iv;
+             d = new SecureRandom().generateSeed(8);
+             e = new SecureRandom().generateSeed(8);
              IESParameterSpec param = new IESParameterSpec(d, e, 256);
              cipher.init(Cipher.ENCRYPT_MODE, new IEKeySpec(privateKey,publicKey), param);
-
              return cipher.doFinal(data);
-
-
          }
-         catch (Exception e){
-             e.printStackTrace();
+         catch (Exception exception){
+             exception.printStackTrace();
              return null;
          }
      }

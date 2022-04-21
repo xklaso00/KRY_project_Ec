@@ -67,7 +67,7 @@ public class SenderClass {
         }
 
     }
-    public static boolean sendEncFile(String fileName, byte[] encryptedFileBytes, byte[] iv, String username, String address, byte []d){
+    public static boolean sendEncFile(String fileName, byte[] encryptedFileBytes, byte[] e, String username, String address, byte []d){
 
         try {
             Socket socket = new Socket(address, 5000);
@@ -84,8 +84,8 @@ public class SenderClass {
             dataOutputStream.writeInt(encryptedFileBytes.length);
             dataOutputStream.write(encryptedFileBytes);
 
-            dataOutputStream.writeInt(iv.length);
-            dataOutputStream.write(iv);
+            dataOutputStream.writeInt(e.length);
+            dataOutputStream.write(e);
 
             dataOutputStream.writeInt(d.length);
             dataOutputStream.write(d);
@@ -100,8 +100,8 @@ public class SenderClass {
 
 
             return true;
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
             return false;
         }
     }

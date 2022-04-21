@@ -1,5 +1,5 @@
 package vutbr.feec.eccProjekt.core;
-
+//this class is mostly used for testing
 public  class Utils {
 
     //function to make it possible to write bytes to console as a string, mostly for testing purposes
